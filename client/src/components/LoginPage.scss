@@ -1,0 +1,48 @@
+.LoginPage {
+    height: 80%;
+    width: 80%;
+    background-color: #add8e6;
+    -webkit-box-shadow: 24px 24px 14px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 24px 24px 14px 5px rgba(0,0,0,0.75);
+    box-shadow: 24px 24px 14px 5px rgba(0,0,0,0.75);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .__form {
+        height: 40%;
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+
+        .__login {
+            font-size: 200%;
+            position: absolute;
+            top: 10rem;
+        }
+
+        .__left {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+            justify-content: space-around;
+            margin-right: 1rem;
+        }
+
+        .__right {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-left: 1rem;
+
+            input {
+                width: 80%;
+                height: 2rem;
+                font-size: 90%;
+            }
+        }
+    }
+}
