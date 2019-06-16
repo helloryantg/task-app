@@ -3,6 +3,7 @@ import './App.scss';
 import axios from 'axios'
 import TaskWorkspace from './TaskWorkspace'
 import LoginPage from './LoginPage'
+import * as groupServices from '../services/group.service'
 
 class App extends Component {
 
@@ -11,10 +12,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('/groups/all').then(res => {
-      // console.log(res)
+    groupServices.getAllGroups()
+      .then(({ data }) => {
       this.setState(() => ({
-        groups: res.data
+        groups: data
       }))
     })
   }

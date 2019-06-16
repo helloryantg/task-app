@@ -5,4 +5,5 @@ const groupController = require('../controllers/group.controller')
 
 router.get('/all', groupController.getAllGroups)
 
+
 module.exports = router;
