@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/tasks', task)
 app.use('/groups', group)
 
-
-
 app.get('/devInformation', (req, res) => {
     // This is for testing purposes
     const data = {

@@ -11,6 +11,11 @@ const TaskSchema = new Schema({
         type: String,
         required: true,
         max: 250
+    },
+    groupName: {
+        type: String,
+        required: true,
+        max: 200
     }
 })
 
