@@ -8,10 +8,6 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/tasks', task)
 
-app.get('/', (req, res) => {
-    res.send('Data')
-})
-
 app.get('/devInformation', (req, res) => {
     // This is for testing purposes
     const data = {

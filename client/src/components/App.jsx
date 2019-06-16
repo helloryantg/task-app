@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.scss';
+import axios from 'axios'
 
 import LoginPage from './LoginPage'
 
 class App extends Component {
 
   componentDidMount() {
-    fetch('/tasks/test')
-      .then(res => console.log(res))
+    axios.get('tasks/test').then(res => console.log(res))
   }
 
   render() {
