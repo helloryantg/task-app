@@ -1,8 +1,14 @@
 import React from 'react'
 import './TaskWorkspace.scss'
 import GroupTab from './GroupTab'
+import GroupPlus from './GroupPlus'
 
-const TaskWorkspace = () => {
+const TaskWorkspace = ({ groups }) => {
+
+    console.log(groups)
+
+    if (!groups.length) return <div>Loading...</div> 
+
     return (
         <div className="TaskWorkspace">
             <div className="__groupList">
@@ -10,10 +16,10 @@ const TaskWorkspace = () => {
                     <input type="text" placeholder="Search"/>
                 </div>
 
-                <GroupTab text={'Camping'} />    
-                <GroupTab text={'Item 2'} />    
-                <GroupTab text={'Item 3'} />    
-                <GroupTab text={'Item 4'} />    
+                {groups.map(({ title }, idx) => {
+                    return <GroupTab text={title} key={idx} />
+                })}
+                <GroupPlus />
             </div>
 
             <div className="__taskList">

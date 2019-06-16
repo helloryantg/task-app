@@ -6,15 +6,29 @@ import LoginPage from './LoginPage'
 
 class App extends Component {
 
+  state = {
+    groups: null
+  }
+
   componentDidMount() {
-    axios.get('tasks/test').then(res => console.log(res))
+    axios.get('/groups/all').then(res => {
+      // console.log(res)
+      this.setState(() => ({
+        groups: res.data
+      }))
+    })
   }
 
   render() {
+
+    const { groups } = this.state
+
+    if (!groups) return <div>Loading...</div>
+
     return (
       <div className="App">
         {/* <LoginPage /> */}
-        <TaskWorkspace />
+        <TaskWorkspace groups={groups} />
       </div>
     )
   }

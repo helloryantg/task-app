@@ -2,11 +2,15 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const task = require('./routes/task.route')
+const group = require('./routes/group.route')
 
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/tasks', task)
+app.use('/groups', group)
+
+
 
 app.get('/devInformation', (req, res) => {
     // This is for testing purposes
