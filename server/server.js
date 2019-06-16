@@ -1,12 +1,20 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
+const logger = require('morgan')
 
 const task = require('./routes/task.route')
 const group = require('./routes/group.route')
 
 const app = express()
 
+require('dotenv').config();
+require('./config/database')
+
+app.use(logger('dev'))
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use('/tasks', task)
 app.use('/groups', group)
 
