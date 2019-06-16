@@ -1,0 +1,13 @@
+.GroupTab {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    &:hover {
+        background-color: #3f3f3f;
+        cursor: pointer;
+    }
+}

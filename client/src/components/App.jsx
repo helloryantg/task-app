@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import axios from 'axios'
-
+import TaskWorkspace from './TaskWorkspace'
 import LoginPage from './LoginPage'
 
 class App extends Component {
@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <LoginPage /> */}
+        <TaskWorkspace />
       </div>
     )
   }
