@@ -12,5 +12,5 @@ const getAllGroups = (req, res) => {
 }
 
 module.exports = {
-    getAllGroups: getAllGroups
+    getAllGroups
 }

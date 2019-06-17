@@ -3,9 +3,6 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const logger = require('morgan')
 
-const task = require('./routes/task.route')
-const group = require('./routes/group.route')
-
 const app = express()
 
 require('dotenv').config();
@@ -15,20 +12,20 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/tasks', task)
-app.use('/groups', group)
+app.use('/tasks', require('./routes/task.route'))
+app.use('/groups', require('./routes/group.route'))
 
-app.get('/devInformation', (req, res) => {
-    // This is for testing purposes
-    const data = {
-        name: "Ryan",
-        age: 29,
-        job: "Backend developer",
-        portfolioUrl: "https://ryangonz.com"
-    }
+// app.get('/devInformation', (req, res) => {
+//     // This is for testing purposes
+//     const data = {
+//         name: "Ryan",
+//         age: 29,
+//         job: "Backend developer",
+//         portfolioUrl: "https://ryangonz.com"
+//     }
 
-    res.send(data)
-})
+//     res.send(data)
+// })
 
 app.get('*', (req, res) => {
     res.send('404 not found!')

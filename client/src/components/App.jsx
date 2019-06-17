@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
-import axios from 'axios'
 import TaskWorkspace from './TaskWorkspace'
-import LoginPage from './LoginPage'
+// import LoginPage from './LoginPage'
 import * as groupServices from '../services/group.service'
 
 class App extends Component {
