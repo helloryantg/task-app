@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const GroupSchema = new Schema({
+const groupSchema = new Schema({
     title: String,
     author: String,
     body: String,
@@ -11,4 +11,4 @@ const GroupSchema = new Schema({
 
 
 
-module.exports = mongoose.model('Group', GroupSchema)
+module.exports = mongoose.model('Group', groupSchema)
