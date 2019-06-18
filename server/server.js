@@ -8,25 +8,19 @@ const app = express()
 require('dotenv').config();
 require('./config/database')
 
+// Middleware
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Routes
 app.use('/tasks', require('./routes/task.route'))
 app.use('/groups', require('./routes/group.route'))
 
-// app.get('/devInformation', (req, res) => {
-//     // This is for testing purposes
-//     const data = {
-//         name: "Ryan",
-//         age: 29,
-//         job: "Backend developer",
-//         portfolioUrl: "https://ryangonz.com"
-//     }
+// Put API routes here, before the "catch all" route
+app.use(require('./config/auth'))
 
-//     res.send(data)
-// })
-
+// Catch all route
 app.get('*', (req, res) => {
     res.send('404 not found!')
 })
