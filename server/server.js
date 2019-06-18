@@ -18,6 +18,7 @@ app.use('/tasks', require('./routes/task.route'))
 app.use('/groups', require('./routes/group.route'))
 
 // Put API routes here, before the "catch all" route
+app.use('api/users', require('./routes/api/user.route'))
 app.use(require('./config/auth'))
 
 // Catch all route
