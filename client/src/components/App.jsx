@@ -19,10 +19,10 @@ class App extends Component {
   componentDidMount() {
     groupServices.getAllGroups()
       .then(({ data }) => {
-      this.setState(() => ({
-        groups: data
-      }))
-    })
+        this.setState(() => ({
+          groups: data
+        }))
+      })
   }
 
   render() {
@@ -35,6 +35,10 @@ class App extends Component {
 
     return (
       <div className="App">
+
+
+
+
         <TaskWorkspace groups={groups} />
       </div>
     )
