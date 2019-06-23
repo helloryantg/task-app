@@ -8,6 +8,28 @@ const getAllTasks = (req, res, next) => {
     })
 }
 
+const createTask = (req, res, next) => {
+    const { 
+        type,
+        description,
+        groupName
+    } = req.body
+
+    const task = new Task({
+        type,
+        description,
+        groupName 
+    })
+
+    task.save((err) => {
+        if (err) {
+            return next(err)
+        }
+        res.send('Task created successfully')
+    })
+}
+
 module.exports = {
-    getAllTasks
+    getAllTasks,
+    createTask
 }
