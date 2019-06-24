@@ -29,7 +29,15 @@ const createTask = (req, res, next) => {
     })
 }
 
+const updateTask = (req, res, next) => {
+    Task.findByIdAndUpdate(req.params.id, { $set: req.body }, (err, task) => {
+        if (err) return next(err)
+        res.send('Task updated')
+    })
+}
+
 module.exports = {
     getAllTasks,
-    createTask
+    createTask,
+    updateTask
 }
