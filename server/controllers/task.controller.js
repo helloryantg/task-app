@@ -36,8 +36,16 @@ const updateTask = (req, res, next) => {
     })
 }
 
+const deleteTask = (req, res, next) => {
+    Task.findByIdAndRemove(req.params.id, (err) => {
+        if (err) return next(err)
+        res.send('Deleted successfully')
+    })
+}
+
 module.exports = {
     getAllTasks,
     createTask,
-    updateTask
+    updateTask,
+    deleteTask
 }
