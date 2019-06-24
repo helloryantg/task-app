@@ -7,7 +7,7 @@ module.exports = {
     login
 }
 
-function login(req, res) {
+const login = (req, res) => {
     User.findOne({ email: req.body.email })
         .exec()
         .then(user => {
@@ -24,13 +24,15 @@ function login(req, res) {
         .catch(err => res.status(400).json(err))
 }
 
-function signup(req, res) {
+const signup = (req, res) => {
     const user = new User(req.body)
 
     user.save()
         .then(user => res.json({ token: createJWT(user) }))
         .catch(err => res.status(400).json(err))
 }
+
+
 
 function createJWT(user) {
     return jwt.sign({ user }, SECRET, { expiresIn: '24h' })

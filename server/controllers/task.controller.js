@@ -1,9 +1,15 @@
 const Task = require('../models/Task.model')
 
+module.exports = {
+    getAllTasks,
+    createTask,
+    updateTask,
+    deleteTask
+}
+
 const getAllTasks = (req, res, next) => {
     Task.find({}, (err, tasks) => {
         if (err) return next(err)
-        
         return tasks
     })
 }
@@ -22,9 +28,7 @@ const createTask = (req, res, next) => {
     })
 
     task.save((err) => {
-        if (err) {
-            return next(err)
-        }
+        if (err) return next(err)
         res.send('Task created successfully')
     })
 }
@@ -41,11 +45,4 @@ const deleteTask = (req, res, next) => {
         if (err) return next(err)
         res.send('Deleted successfully')
     })
-}
-
-module.exports = {
-    getAllTasks,
-    createTask,
-    updateTask,
-    deleteTask
 }
