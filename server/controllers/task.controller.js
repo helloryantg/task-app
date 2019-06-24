@@ -1,12 +1,5 @@
 const Task = require('../models/Task.model')
 
-module.exports = {
-    getAllTasks,
-    createTask,
-    updateTask,
-    deleteTask
-}
-
 const getAllTasks = (req, res, next) => {
     Task.find({}, (err, tasks) => {
         if (err) return next(err)
@@ -15,14 +8,17 @@ const getAllTasks = (req, res, next) => {
 }
 
 const createTask = (req, res, next) => {
+
+    console.log(req)
+
     const { 
-        type,
+        title,
         description,
         groupName
     } = req.body
 
     const task = new Task({
-        type,
+        title,
         description,
         groupName 
     })
@@ -45,4 +41,11 @@ const deleteTask = (req, res, next) => {
         if (err) return next(err)
         res.send('Deleted successfully')
     })
+}
+
+module.exports = {
+    getAllTasks,
+    createTask,
+    updateTask,
+    deleteTask
 }

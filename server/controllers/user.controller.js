@@ -2,11 +2,6 @@ const User = require('../models/User.model')
 const jwt = require('jsonwebtoken')
 const SECRET = process.env.SECRET
 
-module.exports = {
-    signup,
-    login
-}
-
 const login = (req, res) => {
     User.findOne({ email: req.body.email })
         .exec()
@@ -32,8 +27,11 @@ const signup = (req, res) => {
         .catch(err => res.status(400).json(err))
 }
 
-
-
 function createJWT(user) {
     return jwt.sign({ user }, SECRET, { expiresIn: '24h' })
+}
+
+module.exports = {
+    signup,
+    login
 }
