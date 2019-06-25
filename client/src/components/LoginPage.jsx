@@ -9,7 +9,7 @@ class LoginPage extends Component {
     }
 
     componentDidMount() {
-
+        
     }
 
     render() {

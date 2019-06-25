@@ -8,6 +8,7 @@ import './App.scss';
 import TaskWorkspace from './TaskWorkspace'
 import LoginPage from './LoginPage'
 import * as groupServices from '../services/group.service'
+import * as userServices from '../services/user.service'
 
 class App extends Component {
 
@@ -17,6 +18,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const user = userServices.getUser()
+
+    console.log('user', user)
+    
     groupServices.getAllGroups()
       .then(({ data }) => {
         this.setState(() => ({
@@ -29,7 +34,7 @@ class App extends Component {
 
     const { user, groups } = this.state
 
-    if (!user) return <LoginPage />
+    // if (!user) return <LoginPage />
 
     if (!groups) return <div>Loading...</div>
 

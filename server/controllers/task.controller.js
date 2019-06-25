@@ -9,8 +9,6 @@ const getAllTasks = (req, res, next) => {
 
 const createTask = (req, res, next) => {
 
-    console.log(req)
-
     const { 
         title,
         description,

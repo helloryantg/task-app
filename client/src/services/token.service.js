@@ -1,4 +1,4 @@
-function setToken(token) {
+export const setToken = token => {
     if (token) {
         localStorage.setItem('token', token)
     } else {
@@ -6,8 +6,11 @@ function setToken(token) {
     }
 }
 
-function getToken() {
+export const getToken = () => {
+    // const token = localStorage.getItem('token')
     const token = localStorage.getItem('token')
+
+    console.log('token', token)
 
     if (token) {
         const payload = JSON.parse(atob(token.split('.'[1])))
@@ -20,19 +23,12 @@ function getToken() {
     return token
 }
 
-function removeToken() {
+export const removeToken = () => {
     localStorage.removeItem('token')
 }
 
-function  getUserFromToken() {
+export const getUserFromToken = () => {
     const token = getToken()
 
     return token ? JSON.parse(atob(token.split('.'[1]))).user : null
-}
-
-export default {
-    setToken,
-    getToken,
-    getUserFromToken,
-    removeToken
 }
