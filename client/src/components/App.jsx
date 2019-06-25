@@ -22,27 +22,36 @@ class App extends Component {
 
     console.log('user', user)
     
-    groupServices.getAllGroups()
-      .then(({ data }) => {
-        this.setState(() => ({
-          groups: data
-        }))
-      })
+    // groupServices.getAllGroups()
+    //   .then(({ data }) => {
+    //     this.setState(() => ({
+    //       groups: data
+    //     }))
+    //   })
+  }
+
+  handleChange = (e) => {
+    this.setState(() => ({
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  handleSignupOrLogin = () => {
+    this.setState(() =>({
+      user: userServices.getUser()
+    }))
   }
 
   render() {
 
     const { user, groups } = this.state
 
-    // if (!user) return <LoginPage />
+    if (!user) return <LoginPage onSignupOrLogin={this.handleSignupOrLogin} />
 
     if (!groups) return <div>Loading...</div>
 
     return (
       <div className="App">
-
-
-
 
         <TaskWorkspace groups={groups} />
       </div>

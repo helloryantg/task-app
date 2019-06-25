@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as tokenService from './token.service'
 
-export const signup = user => axios.post('/api/users/signup', JSON.stringify(user))
+export const signup = user => axios.get('/api/users/signup', JSON.stringify(user))
     .then(res => {
         if (res.ok) return res.json()
         throw new Error('Email already taken!')

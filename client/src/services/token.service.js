@@ -6,8 +6,7 @@ export const setToken = token => {
     }
 }
 
-export const getToken = () => {
-    // const token = localStorage.getItem('token')
+const getToken = () => {
     const token = localStorage.getItem('token')
 
     console.log('token', token)
@@ -20,6 +19,7 @@ export const getToken = () => {
             token = null
         }
     }
+
     return token
 }
 

@@ -1,15 +1,31 @@
 import React, { Component } from 'react'
 import './LoginPage.scss'
+import * as userServices from '../services/user.service'
 
 class LoginPage extends Component {
     state = {
-        email: null,
-        password: null,
-        validate: null
+        email: '',
+        password: '',
+        validate: ''
     }
 
-    componentDidMount() {
-        
+    handleChange = ({ target }) => {
+        this.setState(() => ({
+            [target.name]: target.value
+        }))
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        console.log(this.state)
+
+        userServices.login(this.state)
+            .then(() => {
+                this.props.onSignupOrLogin()
+            })
+            .catch(err => alert('Invalid Credentials'))
+
     }
 
     render() {
@@ -24,10 +40,11 @@ class LoginPage extends Component {
                     </div>
 
                     <div className="__right">
-                        <input name="text" type="text" autoComplete="new-password" />
-                        <input name="password" type="password" autoComplete="new-password"/>
-                        <input name="password-second" type="password-second" autoComplete="new-password"/>
+                        <input name="email" type="text" autoComplete="new-password" onChange={this.handleChange} />
+                        <input name="password" type="password" autoComplete="new-password" onChange={this.handleChange} />
+                        <input name="password-second" type="password-second" autoComplete="new-password" onChange={this.handleChange} />
                     </div>
+                    <button className="__button" onClick={this.handleSubmit}>Log In</button>
                 </form>
 
             </div>
