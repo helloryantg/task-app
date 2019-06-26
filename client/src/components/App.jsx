@@ -7,6 +7,7 @@ import {
 import './App.scss';
 import TaskWorkspace from './TaskWorkspace'
 import LoginPage from './LoginPage'
+import SignupPage from './SignupPage'
 import * as groupServices from '../services/group.service'
 import * as userServices from '../services/user.service'
 
@@ -46,7 +47,8 @@ class App extends Component {
 
     const { user, groups } = this.state
 
-    if (!user) return <LoginPage onSignupOrLogin={this.handleSignupOrLogin} />
+    // if (!user) return <LoginPage onSignupOrLogin={this.handleSignupOrLogin} />
+    if (!user) return <SignupPage onSignupOrLogin={this.handleSignupOrLogin} />
 
     if (!groups) return <div>Loading...</div>
 
