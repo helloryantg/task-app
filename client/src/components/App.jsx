@@ -22,7 +22,7 @@ class App extends Component {
     const user = userServices.getUser()
 
     console.log('user', user)
-    
+
     // groupServices.getAllGroups()
     //   .then(({ data }) => {
     //     this.setState(() => ({
@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   handleSignupOrLogin = () => {
-    this.setState(() =>({
+    this.setState(() => ({
       user: userServices.getUser()
     }))
   }
@@ -48,15 +48,22 @@ class App extends Component {
     const { user, groups } = this.state
 
     // if (!user) return <LoginPage onSignupOrLogin={this.handleSignupOrLogin} />
-    if (!user) return <SignupPage onSignupOrLogin={this.handleSignupOrLogin} />
 
-    if (!groups) return <div>Loading...</div>
+    let page;
+
+    if (!user) {
+      page = <SignupPage onSignupOrLogin={this.handleSignupOrLogin} />
+    } else if (!groups) {
+      page = <div>Loading...</div>
+    } else {
+      page = <TaskWorkspace groups={groups} />
+    }
 
     return (
       <div className="App">
-
-        <TaskWorkspace groups={groups} />
+        {page}
       </div>
+
     )
   }
 }
