@@ -8,6 +8,10 @@ const app = express()
 require('dotenv').config();
 require('./config/database')
 
+const userRouter = require('./routes/api/user.route') // not started
+const taskRouter = require('./routes/task.route') // almost complete
+const groupRouter = require('./routes/group.route') // not started
+
 // Middleware
 app.use(logger('dev'))
 app.use(express.json())
@@ -15,11 +19,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
-app.use('/tasks', require('./routes/task.route'))
-app.use('/groups', require('./routes/group.route'))
+app.use(taskRouter)
+app.use(groupRouter) // not done yet
 
 // Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/user.route'))
+app.use(userRouter)
 app.use(require('./config/auth'))
 
 
