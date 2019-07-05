@@ -21,7 +21,7 @@ class SignupPage extends Component {
 
         console.log(this.state)
 
-        userServices.login(this.state)
+        userServices.signup(this.state)
             .then(() => {
                 this.props.onSignupOrLogin()
             })
@@ -32,19 +32,26 @@ class SignupPage extends Component {
         return (
             <div className="SignupPage" >
                 <form className="__form" action="" autoComplete="new-password">
-                    <div className="__login">LOGIN</div>
-                    <div className="__left">
-                        <label htmlFor="email">Email address: </label>
-                        <label htmlFor="password">Password: </label>
-                        <label htmlFor="password-second">Repeat password: </label>
+                    <div className="__signup">Sign up</div>
+                    
+                    <div className="__input-container">
+                        <div className="__item">
+                            <label htmlFor="email">Email address: </label>
+                            <input name="email" type="text" autoComplete="new-password" onChange={this.handleChange} />
+                        </div>
+
+                        <div className="__item">
+                            <label htmlFor="password">Password: </label>
+                            <input name="password" type="password" autoComplete="new-password" onChange={this.handleChange} />
+                        </div>
+
+                        <div className="__item">
+                            <label htmlFor="validate">Repeat password: </label>
+                            <input name="validate" type="password" autoComplete="new-password" onChange={this.handleChange} />
+                        </div>
                     </div>
 
-                    <div className="__right">
-                        <input name="email" type="text" autoComplete="new-password" onChange={this.handleChange} />
-                        <input name="password" type="password" autoComplete="new-password" onChange={this.handleChange} />
-                        <input name="password-second" type="password-second" autoComplete="new-password" onChange={this.handleChange} />
-                    </div>
-                    <button className="__button" onClick={this.handleSubmit}>Log In</button>
+                    <button className="__button" onClick={this.handleSubmit}>Create your account</button>
                 </form>
 
             </div>
