@@ -5,6 +5,7 @@ import './SignupPage.scss'
 class SignupPage extends Component {
 
     state = {
+        name: '',
         email: '',
         password: '',
         validate: ''
@@ -19,14 +20,26 @@ class SignupPage extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log(this.state)
+        const { 
+            name,
+            email,
+            password,
+            validate
+        } = this.state
 
-        userServices.signup(this.state)
+        if (password === validate) {
+            userServices.signup({
+                email,
+                name,
+                password
+            })
             .then(() => {
                 this.props.onSignupOrLogin()
             })
             .catch(err => alert('Invalid Credentials'))
-
+        } else {
+            alert('Passwords must match!')
+        }
     }
     render() {
         return (
@@ -35,6 +48,11 @@ class SignupPage extends Component {
                     <div className="__signup">Sign up</div>
                     
                     <div className="__input-container">
+                        <div className="__item">
+                            <label htmlFor="name">Name: </label>
+                            <input name="name" type="text" autoComplete="new-password" onChange={this.handleChange} />
+                        </div>
+
                         <div className="__item">
                             <label htmlFor="email">Email address: </label>
                             <input name="email" type="text" autoComplete="new-password" onChange={this.handleChange} />

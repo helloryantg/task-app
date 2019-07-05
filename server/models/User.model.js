@@ -8,13 +8,11 @@ const userSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
     },
     email: {
         type: String,
-        required: true,
         lowercase: true,
-        unique: true
+        required: true,
     },
     password: String
 }, {
@@ -30,6 +28,8 @@ userSchema.set('toJSON', {
 
 userSchema.pre('save', (next) => {
     const user = this
+
+    console.log('this ran', user)
 
     if (!user.isModified('password')) return next()
     

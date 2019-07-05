@@ -23,7 +23,10 @@ const signup = (req, res) => {
     const user = new User(req.body)
 
     user.save()
-        .then(user => res.json({ token: createJWT(user) }))
+        .then(user => {
+            console.log('user', user)
+
+            return res.json({ token: createJWT(user) })})
         .catch(err => res.status(400).json(err))
 }
 
