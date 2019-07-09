@@ -19,9 +19,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const user = userServices.getUser()
+    // const user = userServices.getUser()
 
-    console.log('user', user)
+    // console.log('user', user)
 
     // groupServices.getAllGroups()
     //   .then(({ data }) => {
@@ -47,21 +47,9 @@ class App extends Component {
 
     const { user, groups } = this.state
 
-    // if (!user) return <LoginPage onSignupOrLogin={this.handleSignupOrLogin} />
-
-    let page;
-
-    if (!user) {
-      page = <SignupPage onSignupOrLogin={this.handleSignupOrLogin} />
-    } else if (!groups) {
-      page = <div>Loading...</div>
-    } else {
-      page = <TaskWorkspace groups={groups} />
-    }
-
     return (
       <div className="App">
-        {page}
+        <TaskWorkspace groups={groups} />
       </div>
 
     )

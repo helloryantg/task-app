@@ -3,11 +3,13 @@ import './TaskWorkspace.scss'
 import GroupTab from './GroupTab'
 import GroupPlus from './GroupPlus'
 
-const TaskWorkspace = ({ groups }) => {
+const TaskWorkspace = () => {
 
-    console.log(groups)
-
-    if (!groups.length) return <div>Loading...</div> 
+    const groups = [
+        { title: 'One' },
+        { title: 'Two' },
+        { title: 'Three' }
+    ]
 
     return (
         <div className="TaskWorkspace">
