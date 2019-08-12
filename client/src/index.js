@@ -5,7 +5,7 @@ import {
     Route
 } from 'react-router-dom'
 import './index.scss';
-import App from './components/App.jsx';
+import App from './components/App/App.jsx';
 
 ReactDOM.render(
     <Router>

@@ -5,11 +5,11 @@ import {
   Route
 } from 'react-router-dom'
 import './App.scss';
-import TaskWorkspace from './TaskWorkspace'
-import LoginPage from './LoginPage'
-import SignupPage from './SignupPage'
-import * as groupServices from '../services/group.service'
-import * as userServices from '../services/user.service'
+import TaskWorkspace from '../TaskWorkspace'
+import LoginPage from '../LoginPage'
+import SignupPage from '../SignupPage'
+import * as groupServices from '../../services/group.service'
+import * as userServices from '../../services/user.service'
 
 class App extends Component {
 
