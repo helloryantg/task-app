@@ -9,6 +9,4 @@ const groupSchema = new Schema({
     tasks: []
 })
 
-
-
 module.exports = mongoose.model('Group', groupSchema)
