@@ -22,7 +22,7 @@ class App extends Component {
     // const user = userServices.getUser()
 
     // console.log('user', user)
-
+    
     // groupServices.getAllGroups()
     //   .then(({ data }) => {
     //     this.setState(() => ({
@@ -47,9 +47,16 @@ class App extends Component {
 
     const { user, groups } = this.state
 
+    let body
+    if (!user) {
+      body = <LoginPage />
+    } else {
+      body = <TaskWorkspace groups={groups} />
+    }
+
     return (
       <div className="App">
-        <TaskWorkspace groups={groups} />
+        {body}
       </div>
 
     )
