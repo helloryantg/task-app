@@ -16,46 +16,23 @@ const AppWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    background-color: black;
     align-items: center;
+    color: white;
 `
 
 class App extends Component {
-    state = {
-        user: null,
-        groups: null
-    }
+    state = {}
 
     componentDidMount() {
 
     }
 
-    handleChange = (e) => {
-        this.setState(() => ({
-            [e.target.name]: e.target.value
-        }))
-    }
-
-    handleSignupOrLogin = () => {
-        this.setState(() => ({
-            user: userServices.getUser()
-        }))
-    }
-
     render() {
-
-        const { user, groups } = this.state
-
-        let body
-        if (!user) {
-            // body = <LoginPage />
-        } else {
-            body = <TaskWorkspace groups={groups} />
-        }
 
         return (
             <AppWrapper>
-                {body}
+                <TaskWorkspace />
             </AppWrapper>
         )
     }
