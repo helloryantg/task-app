@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import * as userServices from '../services/user.service'
+import * as userServices from '../../services/user.service'
 import './SignupPage.scss'
 
 class SignupPage extends Component {

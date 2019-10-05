@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from 'react-router-dom'
-import TaskWorkspace from '../TaskWorkspace'
-import LoginPage from '../LoginPage'
-import SignupPage from '../SignupPage'
-import * as groupServices from '../../services/group.service'
-import * as userServices from '../../services/user.service'
+import TaskWorkspace from '../TaskWorkspace/TaskWorkspace'
+import NavBar from '../NavBar/NavBar'
 import styled from 'styled-components'
 
 const AppWrapper = styled.div`
@@ -32,6 +24,7 @@ class App extends Component {
 
         return (
             <AppWrapper>
+                <NavBar />
                 <TaskWorkspace />
             </AppWrapper>
         )
