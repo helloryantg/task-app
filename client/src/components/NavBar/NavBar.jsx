@@ -74,15 +74,6 @@ const LeftControls = styled.div`
     }
 `
 
-const Logo = styled.div`
-    background-color: black;
-    height: 3.6rem;
-    min-width: 25%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
-
 const RightControls = styled.div`
     height: 3.6rem;
     width: 6rem;
