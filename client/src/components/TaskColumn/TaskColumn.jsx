@@ -6,6 +6,8 @@ import {
     size,
     border
 } from '../../styles/styled-variables'
+import pencil from '../../icons/pencil-edit-button.svg'
+import more from '../../icons/more.svg'
 
 const TaskColumnWrapper = styled.div`
     width: 20rem;
@@ -13,7 +15,7 @@ const TaskColumnWrapper = styled.div`
     margin: 0.6rem;
     display: flex;
     flex-direction: column;
-    background-color: ${color.mediumBlack};
+    background-color: ${color.blackMedium};
     border-radius: ${border.radiusDefault};
 
     & > .title {
@@ -36,14 +38,23 @@ const TaskColumnWrapper = styled.div`
             padding: 0.6rem;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             margin: 0.4rem 0.2rem;
-            border-bottom: 2px solid ${color.darkBlack};
-            border-right: 1px solid ${color.darkBlack}
+            border-bottom: 2px solid ${color.blackDark};
+            border-right: 1px solid ${color.blackDark}
             border-radius: ${border.radiusDefault};
             background-color: ${darken(0.24, color.blackLight)};
 
             &:hover {
-                background-color: ${color.lightBlack};
+                background-color: ${color.blackLight};
+
+                & img {
+                    display: block;
+                }
+            }
+
+            & img {
+                display: none;
             }
         }
 
@@ -99,7 +110,7 @@ const TaskColumnWrapper = styled.div`
         }
 
         &:hover {
-            background-color: ${color.lightBlack};
+            background-color: ${color.blackLight};
         }
     }
 `
@@ -112,6 +123,13 @@ const IconWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: ${border.radiusDefault};
+    background-color: inherit;
+    
+    & > img {
+        height: 1rem;
+        width: 1rem;
+        filter: invert(100%);
+    }
 `
 
 const dummyItems = [
@@ -135,38 +153,66 @@ const dummyItems = [
 class TaskColumn extends Component {
 
     state = {
-        title: 'Default Title',
+        title: 'Things to keep in mind',
         items: dummyItems,
         selected: [],
-        addButton: false
+        addButton: false,
+        textValue: ''
     }
 
     handleClickAdd = () => {
         this.setState(prevState => ({
-            addButton: !prevState.addButton
+            addButton: !prevState.addButton,
+            textValue: ''
         }))
     }
 
-    handleAddCard = (newItem) => {
+    handleAddCard = () => {
+        const newItem = {
+            label: this.state.textValue,
+            description: '',
+            createdOn: Date.now()
+        }
+        
         this.setState((prevState) => ({
-            items: [...prevState.items, newItem]
+            items: [...prevState.items, newItem],
+            textValue: ''
         }))
+    }
+
+    handleTextAreaChange = ({ target }) => {
+        this.setState(() => ({
+            textValue: target.value
+        }))
+    }
+
+    handleEnterPress = (e) => {
+        if (e.keyCode === 13 && e.shiftKey === false) {
+            e.preventDefault()
+            if (this.state.textValue === "") {
+                return
+            }
+            this.handleAddCard()
+        }
     }
 
     render() {
         const {
             title,
             items,
-            addButton
+            addButton,
+            textValue
         } = this.state
 
-        console.log(addButton)
+        console.log(items)
 
         return (
             <TaskColumnWrapper>
                 <div className="title">
                     <div className="__text">{title}</div>
-                    <IconWrapper>Dots</IconWrapper>
+                    <IconWrapper>
+                        <img src={more} alt=""/>
+                    </IconWrapper>
                 </div>
 
                 <div className="items">
@@ -175,7 +221,12 @@ class TaskColumn extends Component {
                             <div
                                 className="item"
                                 key={idx}
-                            >{item.label}</div>
+                            >
+                                <div className="label">{item.label}</div>
+                                <IconWrapper>
+                                    <img src={pencil} alt=""/>
+                                </IconWrapper>
+                            </div>
                         )
                     })}
                 </div>
@@ -183,9 +234,19 @@ class TaskColumn extends Component {
                 <div className="button">
                     {addButton ?
                         <div className="__add--active">
-                            <textarea placeholder="Enter a title for this card" name="" id="" cols="30" rows="10"></textarea>
+                            <textarea 
+                                placeholder="Enter a title for this card" 
+                                name="" 
+                                id="" 
+                                cols="30" 
+                                rows="10"
+                                value={textValue}
+                                onChange={this.handleTextAreaChange}
+                                autoFocus
+                                onKeyDown={this.handleEnterPress}
+                                />
                             <div className="bottom">
-                                <button>Add Card</button>
+                                <button onClick={this.handleAddCard}>Add Card</button>
                                 <div className="cancel" onClick={this.handleClickAdd}>
                                     <IconWrapper>X</IconWrapper>
                                 </div>
