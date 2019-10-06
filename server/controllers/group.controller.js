@@ -1,14 +1,14 @@
 const Group = require('../models/Group.model')
+const fs = require('fs')
+
 
 const getAllGroups = (req, res) => {
-    const date = Date.now()
 
-    const group1 = new Group({ title: "Camping", createdOn: date })
-    const group2 = new Group({ title: "Shopping", createdOn: date })
-    const group3 = new Group({ title: "Health", createdOn: date })
-    const group4 = new Group({ title: "Travel", createdOn: date })
+    const json = fs.readFileSync('/Users/ryan03gonz/GitHub/task-app/server/api/data.json')
+    const data = JSON.parse(json)
+    console.log(data)
 
-    res.send([group1, group2, group3, group4])
+    res.send(data)
 }
 
 module.exports = {

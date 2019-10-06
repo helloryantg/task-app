@@ -1,0 +1,38 @@
+{
+    "groups": [
+        {
+            "title": "Things to keep in mind",
+            "tasks": [
+                {
+                    "label": "This is the label",
+                    "description": "This is the description",
+                    "createdOn": 1570394802
+                },
+                {
+                    "label": "This is the second label",
+                    "description": "This is the second description",
+                    "createdOn": 1570394802
+                }
+            ]
+        }, 
+        {
+            "title": "Things to keep in mind",
+            "tasks": [
+                {
+                    "label": "This is the label",
+                    "description": "This is the description",
+                    "createdOn": 1570394802
+                },
+                {
+                    "label": "This is the second label",
+                    "description": "This is the second description",
+                    "createdOn": 1570394802
+                }
+            ]
+        }
+    ],
+    "creator": {
+        "fullName": "Ryan Gonzales",
+        "initials": "RG"
+    }
+}

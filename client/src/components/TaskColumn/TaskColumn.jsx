@@ -197,6 +197,12 @@ class TaskColumn extends Component {
         }
     }
 
+    handleBlur = () => {
+        this.setState(() => ({ 
+            addButton: false
+        }))
+    }
+
     render() {
         const {
             items,
@@ -246,6 +252,7 @@ class TaskColumn extends Component {
                                 onChange={this.handleTextAreaChange}
                                 autoFocus
                                 onKeyDown={this.handleEnterPress}
+                                onBlur={this.handleBlur}
                             />
                             <div className="bottom">
                                 <button onClick={this.handleAddCard}>Add Card</button>

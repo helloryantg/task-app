@@ -6,6 +6,7 @@ import {
     color,
     size 
 } from '../../styles/styled-variables'
+import axios from 'axios'
 
 const AppWrapper = styled.div`
     height: 120vh;
@@ -19,18 +20,25 @@ const AppWrapper = styled.div`
 `
 
 class App extends Component {
-    state = {}
+    state = {
+        groups: []
+    }
 
-    componentDidMount() {
+    async componentDidMount() {
+        const groups = await axios.get('/groups/all')
 
+        this.setState(() => ({
+            groups
+        }))
     }
 
     render() {
+        const { groups } = this.state
 
         return (
             <AppWrapper>
                 <NavBar />
-                <TaskWorkspace />
+                <TaskWorkspace groups={groups} />
             </AppWrapper>
         )
     }
