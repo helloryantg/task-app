@@ -10,6 +10,7 @@ import {
 const AppWrapper = styled.div`
     height: 120vh;
     width: 100%;
+    overflow-y: hidden;
     display: flex;
     flex-direction: column;
     background-color: ${color.darkBlack};

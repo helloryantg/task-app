@@ -2,11 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { 
     color,
-    size 
+    size,
+    border 
 } from '../../styles/styled-variables'
+import home from '../../icons/home.svg'
+import list from '../../icons/list.svg'
+import search from '../../icons/search.svg'
+import add from '../../icons/add.svg'
+import information from '../../icons/information.svg'
+import alarm from '../../icons/alarm-bell.svg'
 
 const NavBarWrapper = styled.div`
-    height: 4rem;
+    height: 2.2rem;
     width: 100%;
     background-color: ${color.mediumBlack};
     display: flex;
@@ -23,59 +30,58 @@ const LeftControls = styled.div`
     min-width: 25%;
 
     & > .home {
-        height: 3.6rem;
-        width: 3.6rem;
+        height: 2rem;
+        width: 2rem;
         background-color: ${color.darkBlack};
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0 0.4rem;
+        border-radius: ${border.radiusDefault};
     }
 
     & > .boards {
         background-color: ${color.darkBlack};
-        height: 3.6rem;
+        height: 2rem;
         width: 6rem;
         display: flex;
         align-items: center;
         justify-content: space-around;
         padding: 0 0.6rem;
         margin-right: 0.4rem;
+        border-radius: ${border.radiusDefault};
 
-        & > .__label {
-
-        }
     }
 
     & > .search {
-        height: 3.6rem;
-        width: 14rem;
+        height: 32px;
+        width: 16rem;
         background-color: ${color.darkBlack};
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        border-radius: ${border.radiusDefault};
 
         & > .__input {
-            height: 3.2rem;
-            width: 10rem;
-            font-size: 24px;
+            height: 1rem;
+            width: 14rem;
+            font-size: 14px;
+            border-radius: ${border.radiusDefault};
+            padding: 0.3rem 0.4rem;
 
             &:focus {
                 outline: none;
             }
         }
 
-        & > .__icon {
-            height: 3.6rem;
-            width: 3.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        & img {
+            padding: 0 0.4reml
         }
     }
 `
 
 const RightControls = styled.div`
-    height: 3.6rem;
+    height: 2rem;
     width: 6rem;
     display: flex;
     justify-content: flex-end;
@@ -84,11 +90,12 @@ const RightControls = styled.div`
 
     & > .plus {
         background-color: ${color.darkBlack};
-        height: 3.6rem;
-        width: 3.6rem;
+        height: 2rem;
+        width: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: ${border.radiusDefault};
 
         & > .__icon {
             height: 1.8rem;
@@ -98,13 +105,14 @@ const RightControls = styled.div`
     }
 
     & > .info {
-        height: 3.6rem;
-        width: 3.6rem;
+        height: 2rem;
+        width: 2rem;
         background-color: ${color.darkBlack};
         display: flex;
         align-items: center;
         justify-content: center;
         margin-left: 0.4rem;
+        border-radius: ${border.radiusDefault};
 
         & > .__icon {
             height: 1.8rem;
@@ -114,8 +122,8 @@ const RightControls = styled.div`
     }
 
     & > .notifications {
-        height: 3.6rem;
-        width: 3.6rem;
+        height: 2rem;
+        width: 2rem;
         background-color: ${color.darkBlack};
         display: flex;
         align-items: center;
@@ -130,8 +138,8 @@ const RightControls = styled.div`
     }
 
     & > .user {
-        height: 3.6rem;
-        width: 3.6rem;
+        height: 2rem;
+        width: 2rem;
         background-color: ${color.darkBlack};
         display: flex;
         align-items: center;
@@ -151,6 +159,17 @@ const IconWrapper = styled.div`
     height: 1.8rem;
     width: 1.8rem;
     background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: ${border.radiusDefault};
+    background-color: inherit;
+    
+    & > img {
+        height: 1rem;
+        width: 1rem;
+        filter: invert(100%);
+    }
 `
 
 function NavBar() {
@@ -158,15 +177,21 @@ function NavBar() {
         <NavBarWrapper>
             <LeftControls>
                 <div className="home">
-                    <IconWrapper></IconWrapper>
+                    <IconWrapper>
+                        <img src={home} alt=""/>
+                    </IconWrapper>
                 </div>
                 <div className="boards">
-                    <IconWrapper>B</IconWrapper>
-                    <div className="__label">Boards</div>
+                    <IconWrapper>
+                        <img src={list} alt=""/>
+                    </IconWrapper>
+                    <div className="__label">Lists</div>
                 </div>
                 <div className="search">
                     <input type="text" className="__input" />
-                    <div className="__icon">M</div>
+                    <IconWrapper>
+                        <img src={search} alt=""/>
+                    </IconWrapper>
                 </div>
             </LeftControls>
             
@@ -174,13 +199,19 @@ function NavBar() {
 
             <RightControls>
                 <div className="plus">
-                    <IconWrapper>+</IconWrapper>
+                    <IconWrapper>
+                        <img src={add} alt=""/>
+                    </IconWrapper>
                 </div>
                 <div className="info">
-                    <IconWrapper>I</IconWrapper>
+                    <IconWrapper>
+                        <img src={information} alt=""/>
+                    </IconWrapper>
                 </div>
                 <div className="notifications">
-                    <IconWrapper>N</IconWrapper>
+                    <IconWrapper>
+                        <img src={alarm} alt=""/>
+                    </IconWrapper>
                 </div>
                 <div className="user">
                     <IconWrapper>RG</IconWrapper>

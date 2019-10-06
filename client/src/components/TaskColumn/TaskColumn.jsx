@@ -8,6 +8,8 @@ import {
 } from '../../styles/styled-variables'
 import pencil from '../../icons/pencil-edit-button.svg'
 import more from '../../icons/more.svg'
+import close from '../../icons/close.svg'
+import add from '../../icons/add.svg'
 
 const TaskColumnWrapper = styled.div`
     width: 20rem;
@@ -106,6 +108,10 @@ const TaskColumnWrapper = styled.div`
                         color: black;
                     }
                 } 
+            }
+
+            & > .__text {
+                margin-left: 0.4rem;
             }
         }
 
@@ -244,17 +250,22 @@ class TaskColumn extends Component {
                                 onChange={this.handleTextAreaChange}
                                 autoFocus
                                 onKeyDown={this.handleEnterPress}
-                                />
+                            />
                             <div className="bottom">
                                 <button onClick={this.handleAddCard}>Add Card</button>
                                 <div className="cancel" onClick={this.handleClickAdd}>
-                                    <IconWrapper>X</IconWrapper>
+                                    <IconWrapper>
+                                        <img src={close} alt=""/>
+                                    </IconWrapper>
                                 </div>
                             </div>
                         </div>   
                         :
                         <div className="__add" onClick={this.handleClickAdd}>
-                            Add another card
+                            <IconWrapper>
+                                <img src={add} alt=""/>
+                            </IconWrapper>
+                            <div className="__text">Add another card</div>
                         </div>
                     }
                 </div>
