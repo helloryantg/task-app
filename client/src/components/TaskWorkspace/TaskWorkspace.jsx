@@ -1,5 +1,4 @@
 import React from 'react'
-import './TaskWorkspace.scss'
 import GroupTab from '../GroupTab/GroupTab'
 import GroupPlus from '../GroupPlus/GroupPlus'
 import GroupTask from '../../models/GroupTask.model'
