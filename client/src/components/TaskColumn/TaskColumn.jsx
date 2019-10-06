@@ -13,7 +13,6 @@ import add from '../../icons/add.svg'
 
 const TaskColumnWrapper = styled.div`
     width: 20rem;
-    height: 80%;
     margin: 0.6rem;
     display: flex;
     flex-direction: column;
@@ -77,6 +76,7 @@ const TaskColumnWrapper = styled.div`
                 width: 100%;
                 display: flex;
                 flex-direction: column;
+                margin-bottom: 0.4rem;
 
                 & > textarea {
                     height: 4rem;
@@ -115,9 +115,6 @@ const TaskColumnWrapper = styled.div`
             }
         }
 
-        &:hover {
-            background-color: ${color.blackLight};
-        }
     }
 `
 
@@ -138,32 +135,30 @@ const IconWrapper = styled.div`
     }
 `
 
-const dummyItems = [
-    {
-        label: 'This is the label',
-        description: 'This is the description',
-        createdOn: Date.now()
-    },
-    {
-        label: 'Second label',
-        description: 'Second description',
-        createdOn: Date.now()
-    },
-    {
-        label: 'Third label',
-        description: 'Third description',
-        createdOn: Date.now()
-    }
-]
-
 class TaskColumn extends Component {
 
     state = {
         title: 'Things to keep in mind',
-        items: dummyItems,
+        items: [],
         selected: [],
         addButton: false,
         textValue: ''
+    }
+
+    componentDidMount() {
+        this.setState(() => ({
+            items: this.props.items
+        }))
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { items } = this.props
+
+        if (prevProps.items !== this.props.items) {
+            this.setState(() => ({
+                items
+            }))
+        }
     }
 
     handleClickAdd = () => {
@@ -204,13 +199,14 @@ class TaskColumn extends Component {
 
     render() {
         const {
-            title,
             items,
             addButton,
             textValue
         } = this.state
 
-        console.log(items)
+        const {
+            title
+        } = this.props
 
         return (
             <TaskColumnWrapper>

@@ -16,6 +16,10 @@ const taskSchema = new Schema({
         type: String,
         required: true,
         max: 200
+    },
+    createdOn: {
+        type: Date,
+        required: true
     }
 })
 
