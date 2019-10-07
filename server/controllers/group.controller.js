@@ -11,6 +11,13 @@ const getAllGroups = (req, res) => {
     res.send(data)
 }
 
+const addGroup = (req, res) => {
+    const data = req.params
+    console.log(data)
+    console.log('res', res)
+}
+
 module.exports = {
-    getAllGroups
+    getAllGroups,
+    addGroup
 }

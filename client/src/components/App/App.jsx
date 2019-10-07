@@ -21,14 +21,18 @@ const AppWrapper = styled.div`
 
 class App extends Component {
     state = {
-        groups: []
+        groups: [],
+        user: {}
     }
 
     async componentDidMount() {
-        const groups = await axios.get('/groups/all')
+        const response = await axios.get('/groups/all')
+        const groups = response.data.groups
+        const user = response.data.creator
 
         this.setState(() => ({
-            groups
+            groups,
+            user
         }))
     }
 
