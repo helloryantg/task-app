@@ -18,19 +18,23 @@ const addGroup = (req, res) => {
 const addTask = (req, res) => {
     const body = req.body
 
-    const group = body.group
+    const groupName = body.group
     const task = body.task
 
-    // console.log('group', group, 'task: ', task)
-
     const fileData = JSON.parse(fs.readFileSync(fileLocation))
-    const groups = fileData.groups
     
-    groups.push(group)
+    const foundGroup = fileData.groups.find(group => group.title === groupName)
 
-    console.log(groups)
+    if (foundGroup) {
+        foundGroup.tasks.push(task)
+    }
 
-    // fs.writeFile(fileLocation, )
+    const data = JSON.stringify(fileData, null, 2)
+
+    fs.writeFile(fileLocation, data, (err) => {
+        if (err) throw err
+        console.log("Writing file failed")
+    })
 }
 
 module.exports = {

@@ -176,7 +176,7 @@ class TaskColumn extends Component {
         const newItem = {
             label: this.state.textValue,
             description: '',
-            createdOn: Date.now()
+            createdOn: Date.now() / 1000
         }
 
         const data = {
