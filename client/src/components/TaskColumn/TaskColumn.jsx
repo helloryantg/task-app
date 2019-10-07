@@ -146,7 +146,8 @@ class TaskColumn extends Component {
         items: [],
         selected: [],
         addButton: false,
-        textValue: ''
+        textValue: '',
+        editTextValue: ''
     }
 
     componentDidMount() {
@@ -213,11 +214,16 @@ class TaskColumn extends Component {
         }))
     }
 
+    handleEdit = (task) => {
+        
+    }
+
     render() {
         const {
             items,
             addButton,
-            textValue
+            textValue,
+            editTextValue
         } = this.state
 
         const {

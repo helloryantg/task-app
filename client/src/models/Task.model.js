@@ -3,11 +3,13 @@ class Task {
     constructor({
         label = '',
         createdOn = 0,
-        description = ''
+        description = '',
+        id = ''
     } = {}) {
         this.label = label
         this.createdOn = createdOn
         this.description = description
+        this.id = id
     }
 
     update(changes = {}) {
@@ -18,13 +20,15 @@ class Task {
         const {
             label,
             createdOn,
-            description
+            description,
+            id
         } = server
 
         return new this.constructor({
             label,
             description,
-            createdOn
+            createdOn,
+            id
         })
     }
 }

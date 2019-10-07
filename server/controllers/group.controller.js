@@ -26,6 +26,8 @@ const addTask = (req, res) => {
     const foundGroup = fileData.groups.find(group => group.title === groupName)
 
     if (foundGroup) {
+        const nextId = foundGroup.tasks.length + 1
+        task.id = nextId
         foundGroup.tasks.push(task)
     }
 
@@ -35,6 +37,23 @@ const addTask = (req, res) => {
         if (err) throw err
         console.log("Writing file failed")
     })
+}
+
+const editTask = ({ body }, res) => {
+    const {
+        group: groupName,
+        task,
+        id
+    } = body
+    
+    const fileData = JSON.parse(fs.readFileSync(fileLocation))
+
+    const foundGroup = fileData.groups.find(group => group.title === groupName)
+    let foundTask
+
+    if (foundGroup) {
+        foundTask = foundGroup.tasks.find(task => task.id === id)
+    }
 }
 
 module.exports = {

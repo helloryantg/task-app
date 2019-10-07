@@ -4,10 +4,12 @@ class GroupTask {
 
     constructor({
         title = '',
-        tasks = []
+        tasks = [],
+        id
     } = {}) {
         this.title = title
         this.tasks = tasks
+        this.id = id
     }
 
     update(changes = {}) {
@@ -17,12 +19,14 @@ class GroupTask {
     resolve(server) {
         const {
             title,
-            tasks
+            tasks,
+            id
         } = server
 
         return new this.constructor({
             title,
-            tasks: tasks.map(task => new Task().resolve(task))
+            tasks: tasks.map(task => new Task().resolve(task)),
+            id
         })
     }
 }
