@@ -7,6 +7,7 @@ import {
     size 
 } from '../../styles/styled-variables'
 import { getAllGroups } from '../../services/group.service'
+import GroupTask from '../../models/GroupTask.model'
 
 const AppWrapper = styled.div`
     height: 120vh;
@@ -28,7 +29,8 @@ class App extends Component {
     async componentDidMount() {
         
         const response = await getAllGroups()
-        const groups = response.data.groups
+        const groups = response.data.groups.map(group => new GroupTask().resolve(group))
+        console.log(groups)
         const user = response.data.creator
 
         this.setState(() => ({

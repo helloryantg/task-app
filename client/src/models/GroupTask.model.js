@@ -1,27 +1,29 @@
-import { timingSafeEqual } from "crypto";
+import Task from '../models/Task.model'
 
 class GroupTask {
 
     constructor({
         title = '',
-        createdOnDate = 0,
         tasks = []
-    }) {
+    } = {}) {
         this.title = title
-        this.createdOnDate = createdOnDate
         this.tasks = tasks
     }
 
     update(changes = {}) {
-        this.constructor(changes)
+        return new this.constructor(changes)
     }
 
-    addTaskToGroup(task) {
-        this.tasks.push(task)
-    }
+    resolve(server) {
+        const {
+            title,
+            tasks
+        } = server
 
-    get allTasks() {
-        return this.tasks
+        return new this.constructor({
+            title,
+            tasks: tasks.map(task => new Task().resolve(task))
+        })
     }
 }
 
