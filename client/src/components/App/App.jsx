@@ -6,7 +6,7 @@ import {
     color,
     size 
 } from '../../styles/styled-variables'
-import axios from 'axios'
+import { getAllGroups } from '../../services/group.service'
 
 const AppWrapper = styled.div`
     height: 120vh;
@@ -26,7 +26,8 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        const response = await axios.get('/groups/all')
+        
+        const response = await getAllGroups()
         const groups = response.data.groups
         const user = response.data.creator
 

@@ -10,6 +10,10 @@ import pencil from '../../icons/pencil-edit-button.svg'
 import more from '../../icons/more.svg'
 import close from '../../icons/close.svg'
 import add from '../../icons/add.svg'
+import { 
+    addGroup,
+    addTask 
+} from '../../services/group.service'
 
 const TaskColumnWrapper = styled.div`
     width: 20rem;
@@ -174,7 +178,13 @@ class TaskColumn extends Component {
             description: '',
             createdOn: Date.now()
         }
-        
+
+        const data = {
+            group: this.props.title,
+            task: newItem
+        }
+        addTask(data)
+
         this.setState((prevState) => ({
             items: [...prevState.items, newItem],
             textValue: ''

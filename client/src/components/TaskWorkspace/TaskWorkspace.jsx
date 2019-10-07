@@ -21,6 +21,7 @@ function TaskWorkspace(props) {
                     <TaskColumn 
                         title={group.title}
                         items={items}
+                        key={idx}
                     />
                 )
             })}

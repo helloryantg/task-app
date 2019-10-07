@@ -195,8 +195,6 @@ function NavBar() {
                 </div>
             </LeftControls>
             
-            {/* <Logo>RYAN</Logo> */}
-
             <RightControls>
                 <div className="plus">
                     <IconWrapper>
