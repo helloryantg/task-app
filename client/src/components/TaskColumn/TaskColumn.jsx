@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { darken } from 'polished'
+import {
+    darken,
+    lighten
+} from 'polished'
 import styled from 'styled-components'
 import {
     color,
@@ -10,9 +13,9 @@ import pencil from '../../icons/pencil-edit-button.svg'
 import more from '../../icons/more.svg'
 import close from '../../icons/close.svg'
 import add from '../../icons/add.svg'
-import { 
+import {
     addGroup,
-    addTask 
+    addTask
 } from '../../services/group.service'
 
 const TaskColumnWrapper = styled.div`
@@ -64,24 +67,41 @@ const TaskColumnWrapper = styled.div`
             }
 
             & > .description--edit {
-                border: 1px solid red;
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
+                width: 96%;
+                height: 8rem;
                 z-index: 10;
-                background-color: ${color.blackDark};
+                background-color: ${darken(0.30, color.blackLight)};
                 color: white;
                 border-radius: ${border.radiusDefault};
+                display: flex;
+                flex-direction: column;
+                padding: .4rem;
 
                 & > textarea {
                     background-color: transparent;
-                    height: 96%;
-                    width: 96%;
+                    border: none;
+                    height: 6rem;
+                    width: 100%;
                     z-index: 11;
                     color: white;
                     resize: none;
+                    padding: .4rem;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                & > button {
+                    height: 2rem;
+                    width: 6rem;
+                    border-radius: ${border.radiusDefault};
+                    background-color: ${color.blackLight};
+                    color: white;
+                    border: none;
                 }
             }
         }
@@ -232,13 +252,21 @@ class TaskColumn extends Component {
     }
 
     handleBlur = () => {
-        this.setState(() => ({ 
+        this.setState(() => ({
             addButton: false
         }))
     }
 
-    handleEdit = (task) => {
-        
+    handleSelect = id => {
+        this.setState(() => ({
+            selected: [id]
+        }))
+    }
+
+    handleBlurEdit = () => {
+        this.setState(() => ({
+            selected: []
+        }))
     }
 
     render() {
@@ -246,7 +274,8 @@ class TaskColumn extends Component {
             items,
             addButton,
             textValue,
-            editTextValue
+            editTextValue,
+            selected
         } = this.state
 
         const {
@@ -258,7 +287,7 @@ class TaskColumn extends Component {
                 <div className="title">
                     <div className="__text">{title}</div>
                     <IconWrapper>
-                        <img src={more} alt=""/>
+                        <img src={more} alt="" />
                     </IconWrapper>
                 </div>
 
@@ -270,16 +299,28 @@ class TaskColumn extends Component {
                                 key={idx}
                             >
                                 <div className="label">{item.label}</div>
-                                <div className="description--edit">
-                                    <textarea 
-                                        name="" 
-                                        id="" 
-                                        cols="30" 
-                                        rows="10"
-                                    ></textarea>
-                                </div>
+                                
+                                {selected.includes(item.id) ?
+                                    <div className="description--edit">
+                                        <textarea
+                                            name=""
+                                            id=""
+                                            cols="30"
+                                            rows="10"
+                                            autoFocus
+                                            onBlur={this.handleBlurEdit}
+                                        ></textarea>
+                                        <button>Save</button>
+                                    </div> 
+                                    : null
+                                }
+
                                 <IconWrapper>
-                                    <img src={pencil} alt=""/>
+                                    <img 
+                                        src={pencil} 
+                                        alt="" 
+                                        onClick={() => this.handleSelect(item.id)}    
+                                    />
                                 </IconWrapper>
                             </div>
                         )
@@ -289,11 +330,11 @@ class TaskColumn extends Component {
                 <div className="button">
                     {addButton ?
                         <div className="__add--active">
-                            <textarea 
-                                placeholder="Enter a title for this card" 
-                                name="" 
-                                id="" 
-                                cols="30" 
+                            <textarea
+                                placeholder="Enter a title for this card"
+                                name=""
+                                id=""
+                                cols="30"
                                 rows="10"
                                 value={textValue}
                                 onChange={this.handleTextAreaChange}
@@ -305,15 +346,15 @@ class TaskColumn extends Component {
                                 <button onClick={this.handleAddCard}>Add Card</button>
                                 <div className="cancel" onClick={this.handleClickAdd}>
                                     <IconWrapper>
-                                        <img src={close} alt=""/>
+                                        <img src={close} alt="" />
                                     </IconWrapper>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
                         :
                         <div className="__add" onClick={this.handleClickAdd}>
                             <IconWrapper>
-                                <img src={add} alt=""/>
+                                <img src={add} alt="" />
                             </IconWrapper>
                             <div className="__text">Add another card</div>
                         </div>
