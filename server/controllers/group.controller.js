@@ -1,12 +1,14 @@
 const Group = require('../models/Group.model')
 const fs = require('fs')
 
-const fileLocation = '/Users/ryan03gonz/GitHub/task-app/server/api/data.json'
+// const fileLocation = '/Users/ryan03gonz/GitHub/task-app/server/api/data.json'
+const fileLocation = require('../api/data.json')
 
 const getAllGroups = (req, res) => {
 
-    const json = fs.readFileSync(fileLocation)
-    const data = JSON.parse(json)
+    // const json = fs.readFileSync(fileLocation)
+    // const data = JSON.parse(json)
+    const data = fileLocation
 
     res.send(data)
 }
@@ -21,7 +23,8 @@ const addTask = (req, res) => {
     const groupName = body.group
     const task = body.task
 
-    const fileData = JSON.parse(fs.readFileSync(fileLocation))
+    // const fileData = JSON.parse(fs.readFileSync(fileLocation))
+    const fileData = fileLocation
     
     const foundGroup = fileData.groups.find(group => group.title === groupName)
 
