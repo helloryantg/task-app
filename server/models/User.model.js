@@ -19,8 +19,8 @@ const userSchema = new Schema({
     timestamps: true
 })
 
-userSchema.virtual('tasks', {
-    ref: 'Task',
+userSchema.virtual('groups', {
+    ref: 'Group',
     localField: '_id',
     foreignField: 'owner'
 })
