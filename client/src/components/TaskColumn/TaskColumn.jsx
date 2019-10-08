@@ -49,6 +49,7 @@ const TaskColumnWrapper = styled.div`
             border-right: 1px solid ${color.blackDark}
             border-radius: ${border.radiusDefault};
             background-color: ${darken(0.24, color.blackLight)};
+            position: relative;
 
             &:hover {
                 background-color: ${color.blackLight};
@@ -60,6 +61,28 @@ const TaskColumnWrapper = styled.div`
 
             & img {
                 display: none;
+            }
+
+            & > .description--edit {
+                border: 1px solid red;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                background-color: ${color.blackDark};
+                color: white;
+                border-radius: ${border.radiusDefault};
+
+                & > textarea {
+                    background-color: transparent;
+                    height: 96%;
+                    width: 96%;
+                    z-index: 11;
+                    color: white;
+                    resize: none;
+                }
             }
         }
 
@@ -177,7 +200,7 @@ class TaskColumn extends Component {
         const newItem = {
             label: this.state.textValue,
             description: '',
-            createdOn: Date.now() / 1000
+            createdOn: Math.round(Date.now() / 1000)
         }
 
         const data = {
@@ -247,6 +270,14 @@ class TaskColumn extends Component {
                                 key={idx}
                             >
                                 <div className="label">{item.label}</div>
+                                <div className="description--edit">
+                                    <textarea 
+                                        name="" 
+                                        id="" 
+                                        cols="30" 
+                                        rows="10"
+                                    ></textarea>
+                                </div>
                                 <IconWrapper>
                                     <img src={pencil} alt=""/>
                                 </IconWrapper>
