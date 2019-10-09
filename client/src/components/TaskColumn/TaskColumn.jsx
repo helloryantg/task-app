@@ -325,7 +325,7 @@ class TaskColumn extends Component {
                                             rows="10"
                                             autoFocus
                                             onBlur={this.handleBlurEdit}
-                                            value={editTextValue || item.value}
+                                            value={item.label}
                                             onChange={this.handleEditTextAreaChange}
                                             onKeyDown={this.handleEditEnterPress}
                                         ></textarea>

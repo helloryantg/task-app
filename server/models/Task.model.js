@@ -9,7 +9,6 @@ const taskSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
         max: 250
     },
     groupName: {
@@ -18,8 +17,7 @@ const taskSchema = new Schema({
         max: 200
     },
     createdOn: {
-        type: Date,
-        required: true
+        type: Date
     },
     owner: {
         type: String,
