@@ -235,13 +235,25 @@ class TaskColumn extends Component {
         }))
     }
 
+    handleEditCard = (task) => {
+        console.log(task)
+    }
+
     handleTextAreaChange = ({ target }) => {
         this.setState(() => ({
             textValue: target.value
         }))
     }
 
+    handleEditTextAreaChange = ({ target }) => {
+        this.setState(() => ({
+            editTextValue: target.value
+        }))
+    }
+
     handleEnterPress = (e) => {
+        console.log('enter press')
+
         if (e.keyCode === 13 && e.shiftKey === false) {
             e.preventDefault()
             if (this.state.textValue === "") {
@@ -249,6 +261,10 @@ class TaskColumn extends Component {
             }
             this.handleAddCard()
         }
+    }
+
+    handleEditEnterPress = (e) => {
+        console.log('edit enter press')
     }
 
     handleBlur = () => {
@@ -309,6 +325,9 @@ class TaskColumn extends Component {
                                             rows="10"
                                             autoFocus
                                             onBlur={this.handleBlurEdit}
+                                            value={editTextValue || item.value}
+                                            onChange={this.handleEditTextAreaChange}
+                                            onKeyDown={this.handleEditEnterPress}
                                         ></textarea>
                                         <button>Save</button>
                                     </div> 

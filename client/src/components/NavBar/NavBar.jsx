@@ -15,7 +15,7 @@ import alarm from '../../icons/alarm-bell.svg'
 const NavBarWrapper = styled.div`
     height: 2.2rem;
     width: 100%;
-    background-color: ${color.mediumBlack};
+    background-color: ${color.blackMedium};
     display: flex;
     align-items: center;
     padding: 0.4rem;
@@ -32,7 +32,7 @@ const LeftControls = styled.div`
     & > .home {
         height: 2rem;
         width: 2rem;
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,7 +41,7 @@ const LeftControls = styled.div`
     }
 
     & > .boards {
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         height: 2rem;
         width: 6rem;
         display: flex;
@@ -56,7 +56,7 @@ const LeftControls = styled.div`
     & > .search {
         height: 32px;
         width: 16rem;
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -89,7 +89,7 @@ const RightControls = styled.div`
     min-width: 25%;
 
     & > .plus {
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         height: 2rem;
         width: 2rem;
         display: flex;
@@ -107,7 +107,7 @@ const RightControls = styled.div`
     & > .info {
         height: 2rem;
         width: 2rem;
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -124,7 +124,7 @@ const RightControls = styled.div`
     & > .notifications {
         height: 2rem;
         width: 2rem;
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -140,7 +140,7 @@ const RightControls = styled.div`
     & > .user {
         height: 2rem;
         width: 2rem;
-        background-color: ${color.darkBlack};
+        background-color: ${color.blackDark};
         display: flex;
         align-items: center;
         justify-content: center;

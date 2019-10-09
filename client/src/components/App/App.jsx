@@ -15,7 +15,7 @@ const AppWrapper = styled.div`
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
-    background-color: ${color.darkBlack};
+    background-color: ${color.blackDark};
     align-items: center;
     color: white;
 `
