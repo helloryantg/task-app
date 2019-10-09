@@ -20,6 +20,10 @@ const taskSchema = new Schema({
     createdOn: {
         type: Date,
         required: true
+    },
+    owner: {
+        type: String,
+        required: true
     }
 })
 

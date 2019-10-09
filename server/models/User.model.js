@@ -19,6 +19,12 @@ const userSchema = new Schema({
     timestamps: true
 })
 
+userSchema.virtual('groups', {
+    ref: 'Group',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 userSchema.set('toJSON', {
     transform: (doc, ret) => {
         delete ret.password
