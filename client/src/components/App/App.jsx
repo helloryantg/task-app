@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import TaskWorkspace from '../TaskWorkspace/TaskWorkspace'
 import NavBar from '../NavBar/NavBar'
 import styled from 'styled-components'
-import { 
+import {
     color,
     size,
-    border 
+    border
 } from '../../styles/styled-variables'
 import { getAllGroups } from '../../services/group.service'
 import GroupTask from '../../models/GroupTask.model'
@@ -80,7 +80,7 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        
+
         const response = await getAllGroups()
         const groups = response.data.groups.map(group => new GroupTask().resolve(group))
 
@@ -90,9 +90,9 @@ class App extends Component {
     }
 
     render() {
-        const { 
+        const {
             groups,
-            user 
+            user
         } = this.state
 
         let body
@@ -117,15 +117,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/">
-                        {body}
-                    </Route>
-                    <Route path="/login">
-                        <LoginPage />
-                    </Route>
-                    <Route path="/signup">
-                        <SignupPage />
-                    </Route>
+                    <Route exact path="/" component={body} />
+                    <Route exact path="/login" component={<LoginPage />} />
+                    <Route exact path="/signup" component={<SignupPage />} />
                 </Switch>
             </Router>
         )

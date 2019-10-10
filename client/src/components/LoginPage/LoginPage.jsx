@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
 import * as userServices from '../../services/user.service'
+import styled from 'styled-components'
+
+const LoginPageWrapper = styled.div`
+    height: 100%;
+    width: 100%;
+
+`
+
 
 class LoginPage extends Component {
     state = {
@@ -35,7 +43,7 @@ class LoginPage extends Component {
     render() {
 
         return (
-            <div className="LoginPage">
+            <LoginPageWrapper className="LoginPage">
                 <form className="__form" action="" autoComplete="new-password">
                     <div className="__login">LOGIN</div>
                     <div className="__left">
@@ -54,7 +62,7 @@ class LoginPage extends Component {
                     <button className="__button" onClick={this.handleSubmit}>Log In</button>
                 </form>
 
-            </div>
+            </LoginPageWrapper>
         )
     }
 }
