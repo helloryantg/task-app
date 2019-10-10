@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './LoginPage.scss'
 import * as userServices from '../../services/user.service'
 
 class LoginPage extends Component {

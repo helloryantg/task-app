@@ -4,10 +4,19 @@ import NavBar from '../NavBar/NavBar'
 import styled from 'styled-components'
 import { 
     color,
-    size 
+    size,
+    border 
 } from '../../styles/styled-variables'
 import { getAllGroups } from '../../services/group.service'
 import GroupTask from '../../models/GroupTask.model'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom'
+import LoginPage from '../../components/LoginPage/LoginPage'
+import SignupPage from '../../components/SignupPage/SignupPage'
 
 const AppWrapper = styled.div`
     height: 120vh;
@@ -20,6 +29,50 @@ const AppWrapper = styled.div`
     color: white;
 `
 
+const RootPage = styled.div`
+    height: 120vh;
+    width: 100%;
+    background-color: ${color.blackDark};
+    color: white;
+
+    & > .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 2.2rem;
+        padding: 1rem;
+
+        & > .left {
+
+        }
+
+        & > .right {
+            display: flex;
+
+            & > .login,
+            & > .signup {
+                height: 2rem;
+                width: 6rem;
+                border: 1px solid white;
+                border-radius: ${border.radiusDefault}
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: ${color.blackLight};
+                cursor: pointer;
+                color: white;
+                text-decoration: none;
+            }
+
+            & > .signup {
+                background-color: ${color.blackMedium};
+                margin-left: 1rem;
+            }
+
+        }
+    }
+`
+
 class App extends Component {
     state = {
         groups: [],
@@ -30,23 +83,51 @@ class App extends Component {
         
         const response = await getAllGroups()
         const groups = response.data.groups.map(group => new GroupTask().resolve(group))
-        console.log(groups)
-        const user = response.data.creator
 
         this.setState(() => ({
-            groups,
-            user
+            groups
         }))
     }
 
     render() {
-        const { groups } = this.state
+        const { 
+            groups,
+            user 
+        } = this.state
 
-        return (
-            <AppWrapper>
+        let body
+
+        if (Object.entries(user).length === 0) {
+            body = <RootPage>
+                <div className="bar">
+                    <div className="left"></div>
+                    <div className="right">
+                        <Link className="login" to="/login">Login</Link>
+                        <Link className="signup" to="/signup">Signup</Link>
+                    </div>
+                </div>
+            </RootPage>
+        } else {
+            body = <AppWrapper>
                 <NavBar />
                 <TaskWorkspace groups={groups} />
             </AppWrapper>
+        }
+
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/">
+                        {body}
+                    </Route>
+                    <Route path="/login">
+                        <LoginPage />
+                    </Route>
+                    <Route path="/signup">
+                        <SignupPage />
+                    </Route>
+                </Switch>
+            </Router>
         )
     }
 }
