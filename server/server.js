@@ -6,10 +6,10 @@ const logger = require('morgan')
 
 const app = express()
 
-// require('dotenv').config();
-// require('./config/database')
+require('dotenv').config();
+require('./config/database')
 
-// const userRouter = require('./routes/api/user.route') // not started
+const userRouter = require('./routes/api/user.route') // not started
 // const taskRouter = require('./routes/task.route') // almost complete
 const groupRouter = require('./routes/group.route') // not started
 
@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(groupRouter) // not done yet
 
 // Put API routes here, before the "catch all" route
-// app.use(userRouter)
-// app.use(require('./config/auth'))
+app.use(userRouter)
+app.use(require('./config/auth'))
 
 
 // Catch all route

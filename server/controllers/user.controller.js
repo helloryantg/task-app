@@ -6,9 +6,12 @@ const login = (req, res) => {
     User.findOne({ email: req.body.email })
         .exec()
         .then(user => {
+
             if (!user) return res.status(401).json({ err: 'bad credentials' })
 
-            user.comparePassword(req.body.pw, (err, isMatch) => {
+            user.comparePassword(req.body.password, function(err, isMatch) {
+                console.log("is a match? ", isMatch)
+                
                 if (isMatch) {
                     res.json({ token: createJWT(user) })
                 } else {
@@ -24,7 +27,6 @@ const signup = (req, res) => {
 
     user.save()
         .then(user => {
-            console.log('user', user)
 
             return res.json({ token: createJWT(user) })})
         .catch(err => res.status(400).json(err))
