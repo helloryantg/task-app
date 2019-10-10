@@ -12,7 +12,7 @@ export const signup = user => {
 
 export const login = creds => axios.post('/login', creds)
     .then(res => {
-        if (res.ok) return res.json()
+        if (res.status === 200) return res.data
         throw new Error('Bad credentials')
     })
     .then(({ token }) => tokenService.setToken(token))

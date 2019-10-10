@@ -75,33 +75,24 @@ const LoginPageWrapper = styled.div`
 class LoginPage extends Component {
     state = {
         email: '',
-        password: '',
-        validate: ''
+        password: ''
     }
 
-    // handleChange = ({ target }) => {
-    //     this.setState(() => ({
-    //         [target.name]: target.value
-    //     }))
-    // }
+    handleChange = ({ target }) => {
+        this.setState(() => ({
+            [target.name]: target.value
+        }))
+    }
 
-    // handleSubmit = (e) => {
-    //     e.preventDefault()
+    handleSubmit = () => {
+        const { email, password } = this.state
 
-    //     const { password, validate } = this.state
-
-    //     if (password !== validate) {
-    //         alert("Passwords are not the same")
-    //         return
-    //     }
-
-    //     userServices.login(this.state)
-    //         .then(() => {
-    //             this.props.onSignupOrLogin()
-    //         })
-    //         .catch(err => alert('Invalid Credentials'))
-
-    // }
+        userServices.login(this.state)
+            .then(() => {
+                this.props.onSignupOrLogin()
+            })
+            .catch(err => alert('Invalid Credentials'))
+    }
 
     render() {
 
@@ -114,35 +105,29 @@ class LoginPage extends Component {
                     </div>
                     <div className="email">
                         <div className="label">Email</div>
-                        <input type="text"/>
+                        <input 
+                            name="email" 
+                            type="text" 
+                            onChange={this.handleChange} 
+                        />
                     </div>
                     <div className="password">
                         <div className="label">Password</div>
-                        <input type="password"/>
+                        <input 
+                            name="password"
+                            type="password"
+                            autoComplete="new-password"
+                            onChange={this.handleChange}
+                        />
                     </div>
-                    <Link className="login" to="/">
+                    <Link 
+                        className="login" 
+                        to="/"
+                        onClick={this.handleSubmit}
+                    >
                         <div className="label">Log In</div>
                     </Link>
                 </div>
-                
-                
-                {/* <form className="__form" action="" autoComplete="new-password">
-                    <div className="__login">LOGIN</div>
-                    <div className="__left">
-                        <label htmlFor="name">Name: </label>
-                        <label htmlFor="email">Email address: </label>
-                        <label htmlFor="password">Password: </label>
-                        <label htmlFor="password-second">Repeat password: </label>
-                    </div>
-
-                    <div className="__right">
-                        <input name="name" type="text" onChange={this.handleChange} />
-                        <input name="email" type="text" autoComplete="new-password" onChange={this.handleChange} />
-                        <input name="password" type="password" autoComplete="new-password" onChange={this.handleChange} />
-                        <input name="validate" type="password" autoComplete="new-password" onChange={this.handleChange} />
-                    </div>
-                    <button className="__button" onClick={this.handleSubmit}>Log In</button>
-                </form> */}
             </LoginPageWrapper>
         )
     }
