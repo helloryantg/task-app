@@ -117,9 +117,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" component={body} />
-                    <Route exact path="/login" component={<LoginPage />} />
-                    <Route exact path="/signup" component={<SignupPage />} />
+                    <Route exact path="/">{body}</Route>
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/signup" component={SignupPage} />
                 </Switch>
             </Router>
         )
