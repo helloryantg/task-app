@@ -22,14 +22,36 @@ const login = (req, res) => {
         .catch(err => res.status(400).json(err))
 }
 
-const signup = (req, res) => {
-    const user = new User(req.body)
+const signup = (req, res, next) => {
+    const {
+        email,
+        password,
+        name
+    } = req.body
 
-    user.save()
-        .then(user => {
+    User.findOne({ email: email }, function(err, existingUser) {
+        if (err) {
+            return next(err)
+        }
 
-            return res.json({ token: createJWT(user) })})
-        .catch(err => res.status(400).json(err))
+        if (existingUser) {
+            return res.status(422).send({ error: 'Email is already in use' })
+        }
+
+        const user = new User({
+            email,
+            password,
+            name
+        })
+
+        user.save(function(err) {
+            if (err) {
+                return next(err)
+            }
+
+            res.json({ token: createJWT(user) })
+        })
+    })
 }
 
 function createJWT(user) {
