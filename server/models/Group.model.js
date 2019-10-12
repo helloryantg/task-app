@@ -2,9 +2,18 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const groupSchema = new Schema({
-    label: String,
     createdOn: Date,
-    owner: String
+    label: {
+        type: String,
+        required: true
+    },
+    owner: {
+        type: String,
+        required: true
+    }
+},
+{
+    timestamps: true
 })
 
 groupSchema.virtual('tasks', {
