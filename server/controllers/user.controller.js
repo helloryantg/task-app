@@ -10,7 +10,6 @@ const login = (req, res) => {
             if (!user) return res.status(401).json({ err: 'bad credentials' })
 
             user.comparePassword(req.body.password, function(err, isMatch) {
-                console.log("is a match? ", isMatch)
                 
                 if (isMatch) {
                     res.json({ token: createJWT(user) })

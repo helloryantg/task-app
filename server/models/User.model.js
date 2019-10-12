@@ -47,11 +47,21 @@ userSchema.pre('save', function(next) {
     })
 })
 
-userSchema.methods.comparePassword = (tryPassword, cb) => {
+userSchema.methods.comparePassword = function(tryPassword, cb) {
+    const user = this
 
-    const hash = bcrypt.hashSync(tryPassword, SALT_ROUNDS)
+    console.log('user', user.password)
 
-    bcrypt.compare(tryPassword, hash, cb)
+    bcrypt.hash(tryPassword, SALT_ROUNDS, function(err, hash) {
+        if (err) { throw(err) }
+
+        console.log('hash', hash)
+
+        bcrypt.compare(user.password, hash, cb)
+    })
+    
+    // const hash = bcrypt.hashSync(tryPassword, SALT_ROUNDS)
+    // bcrypt.compare(tryPassword, hash, cb)
 }
 
 module.exports = mongoose.model('User', userSchema)

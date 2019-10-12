@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken')
 const SECRET = process.env.SECRET
 
 module.exports = (req, res, next) => {
-    const token = req.get('Authorization') || req.query.token || req.body.token
+    let token = req.get('Authorization') || req.query.token || req.body.token
 
     if (token) {
-        token = token.replace('Bearer ', '')
+        // token = token.replace('Bearer ', '')
         jwt.verify(token, SECRET, (err, decoded) => {
             if (err) {
                 next(err)
@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
             }
         })
     } else {
-        next()
+        // next()
+        res.status(422).send({ error: 'Permission denied' })
     }
 }
