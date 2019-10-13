@@ -11,8 +11,8 @@ require('dotenv').config();
 require('./config/database')
 
 const userRouter = require('./routes/api/user.route') // not started
+const groupRouter = require('./routes/group.route')
 // const taskRouter = require('./routes/task.route') // almost complete
-// const groupRouter = require('./routes/group.route') // not started
 
 // Middleware
 app.use(logger('dev'))
@@ -23,7 +23,7 @@ app.use(morgan('combined'))
 
 // Routes
 // app.use(taskRouter)
-// app.use(groupRouter) // not done yet
+app.use(groupRouter)
 
 // Put API routes here, before the "catch all" route
 app.use(userRouter)

@@ -1,6 +1,6 @@
+const SECRET = process.env.SECRET
 const User = require('../models/User.model')
 const jwt = require('jsonwebtoken')
-const SECRET = process.env.SECRET
 
 const login = (req, res) => {
     User.findOne({ email: req.body.email })
@@ -12,7 +12,10 @@ const login = (req, res) => {
             user.comparePassword(req.body.password, function(err, isMatch) {
                 
                 if (isMatch) {
-                    res.json({ token: createJWT(user) })
+                    res.json({ 
+                        token: createJWT(user),
+                        user 
+                    })
                 } else {
                     return res.status(401).json({ err: 'bad credentials' })
                 }
