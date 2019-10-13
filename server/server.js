@@ -10,7 +10,7 @@ const app = express()
 require('dotenv').config();
 require('./config/database')
 
-const userRouter = require('./routes/api/user.route') // not started
+const userRouter = require('./routes/api/user.route')
 const groupRouter = require('./routes/group.route')
 // const taskRouter = require('./routes/task.route') // almost complete
 

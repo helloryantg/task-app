@@ -10,19 +10,36 @@ const createGroup = (req, res, next) => {
         owner
     } = req.body
 
+    console.log('body', req.body)
+
     if (!label || !owner) {
         return res.status(422).send({
             error: 'You must provide a label'
         })
     }
 
-    Group.find({ owner }, function(err, groups) {
+    Group.findOne({ owner, label }, function(err, existingGroup) {
         if (err) { 
             return next(err) 
         }
 
-        console.log(groups)
-        next(groups)
+        if (existingGroup) {
+            // TODO - Add correct status
+            return res.send({
+                error: "Label already exists, please use a different one"
+            })
+        }
+        
+        const group = new Group({
+            label,
+            owner
+        })
+
+        group.save(function(err) {
+            if (err) { return next(err) }
+
+            res.send(group._id)  
+        })
     })
 }
 
