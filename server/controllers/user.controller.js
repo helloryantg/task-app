@@ -24,7 +24,7 @@ const login = (req, res, next) => {
 
             user.comparePassword(password, function (err, isMatch) {
 
-                if (err) { return next(err) }
+                if (err) return next(err)
 
                 if (isMatch) {
                     res.json({
@@ -59,7 +59,7 @@ const signup = (req, res, next) => {
     }
 
     User.findOne({ email }, function (err, existingUser) {
-        if (err) { return next(err) }
+        if (err) return next(err) 
 
         if (existingUser) {
             return res
@@ -74,7 +74,7 @@ const signup = (req, res, next) => {
         })
 
         user.save(function (err) {
-            if (err) { return next(err) }
+            if (err) return next(err)
 
             res.json({ token: createJWT(user) })
         })

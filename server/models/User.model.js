@@ -49,11 +49,9 @@ userSchema.set('toJSON', {
 })
 
 userSchema.virtual('groups', {
-    ref: 'Group',
+    foreignField: 'owner',
     localField: '_id',
-    foreignField: 'owner'
+    ref: 'Group'
 })
-
-
 
 module.exports = mongoose.model('User', userSchema)

@@ -1,27 +1,25 @@
-const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const mongoose = require('mongoose')
 
 const taskSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        max: 100
-    },
+    createdOn: Date,
     description: {
-        type: String,
-        max: 250
+        max: 250,
+        type: String
     },
     groupName: {
-        type: String,
+        max: 200,
         required: true,
-        max: 200
-    },
-    createdOn: {
-        type: Date
+        type: String
     },
     owner: {
-        type: String,
-        required: true
+        required: true,
+        type: String
+    },
+    title: {
+        max: 100,
+        required: true,
+        type: String
     }
 })
 

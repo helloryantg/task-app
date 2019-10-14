@@ -1,16 +1,13 @@
-const express = require('express')
 const bodyParser = require('body-parser')
-const path = require('path')
+const express = require('express')
 const logger = require('morgan')
+// const path = require('path')
 
 const app = express()
 
+// Database config files
 require('dotenv').config();
 require('./config/database')
-
-const userRouter = require('./routes/api/user.route')
-const groupRouter = require('./routes/group.route')
-// const taskRouter = require('./routes/task.route') // almost complete
 
 // Middleware
 app.use(logger('dev'))
@@ -19,21 +16,13 @@ app.use(bodyParser.json({ type: '*/*' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
-// app.use(taskRouter)
-app.use(groupRouter)
-
-// Put API routes here, before the "catch all" route
-app.use(userRouter)
-// app.use(require('./config/auth'))
-
+app.use(require('./routes/group.route'))
+// app.use(require('./routes/task.route'))
+app.use(require('./routes/api/user.route'))
 
 // Catch all route
-app.get('*', (req, res) => {
-    res.send('404 not found!')
-})
+app.get('*', (req, res) => { res.send('404 not found!') })
 
 const port = process.env.PORT || 5000
 
-app.listen(port, () => {
-    console.log(`Dev app listening on port ${port}`)
-})
+app.listen(port, () => { console.log(`Dev app listening on port ${port}`) })
