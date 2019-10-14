@@ -1,5 +1,5 @@
-const Schema = mongoose.Schema
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const groupSchema = new Schema({
     createdOn: Date,
@@ -13,7 +13,8 @@ const groupSchema = new Schema({
     }
 },
 {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true }
 })
 
 groupSchema.virtual('tasks', {

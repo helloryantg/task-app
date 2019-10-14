@@ -1,18 +1,18 @@
 const Group = require('../models/Group.model')
+const User = require('../models/User.model')
 
 /**
  * Creates a Group
  */
 const createGroup = (req, res, next) => {
-    const { 
-        label = '', 
-        owner = '' 
-    } = req.body
+    const { label = '' } = req.body
 
-    if (!label || !owner) {
+    const owner = req.user._id
+
+    if (!label) {
         return res
             .status(422)
-            .send({ error: 'You must provide a label and an owner' })
+            .send({ error: 'You must provide a label' })
     }
 
     Group.findOne({ owner, label }, function (err, existingGroup) {
@@ -26,7 +26,7 @@ const createGroup = (req, res, next) => {
         const group = new Group({ label, owner })
 
         group.save(function (err) {
-            if (err) return next(err) 
+            if (err) return next(err)
 
             res.send(group._id)
         })
@@ -37,16 +37,9 @@ const createGroup = (req, res, next) => {
  * Get a Group(s)
  */
 const getGroups = (req, res, next) => {
-    const { 
-        owner = '', 
-        ids = [] 
-    } = req.body
+    const { ids = [] } = req.body
 
-    if (!owner) {
-        return res
-            .status(422)
-            .send({ error: 'Please provide an owner' })
-    }
+    const owner = req.user._id
 
     if (!ids.length) {
         return res
@@ -59,27 +52,21 @@ const getGroups = (req, res, next) => {
         .where('_id')
         .in(ids)
         .exec(function (err, existingGroups) {
-        if (err) return next(err)
+            if (err) return next(err)
 
-        if (!existingGroups.length) {
-            res.send({ message: 'No groups found' })
-        }
+            if (!existingGroups.length) {
+                res.send({ message: 'No groups found' })
+            }
 
-        res.send(existingGroups)
-    })
+            res.send(existingGroups)
+        })
 }
 
 /**
  * Gets all of the user's groups
  */
 const getAllGroups = (req, res, next) => {
-    const { owner = '' } = req.query
-
-    if (!owner) {
-        return res
-            .status(422)
-            .send({ error: 'Missing owner' })
-    }
+    const owner = req.user._id
 
     Group.find({ owner }, function (err, groups) {
         if (err) return next(err)
@@ -92,8 +79,45 @@ const getAllGroups = (req, res, next) => {
     })
 }
 
+/**
+ * Searches groups
+ */
+const searchGroups = async (req, res, next) => {
+    const {
+        limit = 10,
+        skip = 20,
+        sortBy = 'createdAt:desc',
+        label
+    } = req.query
+
+    const match = {}
+
+    if (label) {
+        match.label = label
+    }
+
+    const userId = req.user._id
+
+    try {
+
+        Group
+            .find({ owner: userId })
+            .sort({ createdAt: -1 })
+            .exec(function (err, groups) {
+                if (err) return next(err)
+                res.send(groups)
+            })
+
+    } catch (e) {
+        next(e)
+    }
+    
+
+}
+
 module.exports = {
     getAllGroups,
     getGroups,
     createGroup,
+    searchGroups
 }
