@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
     let token = req.get('Authorization') || req.query.token || req.body.token
 
     if (token) {
-        // token = token.replace('Bearer ', '')
         jwt.verify(token, SECRET, (err, decoded) => {
             if (err) {
                 next(err)
@@ -16,7 +15,6 @@ module.exports = (req, res, next) => {
             }
         })
     } else {
-        // next()
         res.status(422).send({ error: 'Permission denied' })
     }
 }
