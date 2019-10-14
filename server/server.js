@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
-const morgan = require('morgan')
 const logger = require('morgan')
 // const fs = require('fs')
 
@@ -19,7 +18,6 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(bodyParser.json({ type: '*/*' }))
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(morgan('combined'))
 
 // Routes
 // app.use(taskRouter)
