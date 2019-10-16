@@ -4,19 +4,12 @@ export const getAllGroups = () => {
     return axios.get('/groups/all')
 }
 
-export const addGroup = group => {
-    const data = {
-        group
-    }
-
-    return axios.put('/groups/add', data)
+export const createGroup = (group) => {
+    return axios.post('/groups/create', group.format())
 }
 
-export const addTask = taskData => {
-    const data = {
-        group: taskData.group,
-        task: taskData.task
-    }
+export const getGroups = (ids) => {
+    const data = { ids }
 
-    return axios.put('/groups/addTask', data)
+    return axios.post('/groups/getGroups', data)
 }

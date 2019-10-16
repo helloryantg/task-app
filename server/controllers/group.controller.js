@@ -39,8 +39,6 @@ const createGroup = (req, res, next) => {
 const getGroups = (req, res, next) => {
     const { ids = [] } = req.body
 
-    const owner = req.user._id
-
     if (!ids.length) {
         return res
             .status(422)
