@@ -2,6 +2,20 @@ const Task = require('../models/Task.model')
 const Group = require('../models/Group.model')
 
 /**
+ * Get User Tasks
+ */
+const getTasks = (req, res, next) => {
+    const user = req.user
+
+    try {
+        const tasks = await Task.find({ _id: user.id })
+        res.send(tasks)
+    } catch (e) {
+        res.status(500).send()
+    }
+}
+
+/**
  * Creates a Task
  */
 const createTask = (req, res, next) => {
@@ -11,6 +25,8 @@ const createTask = (req, res, next) => {
         groupId = '',
         title = ''
     } = req.body
+
+    const user = req.user
 
     if (!groupName || !title) {
         return res
@@ -24,42 +40,57 @@ const createTask = (req, res, next) => {
         // TODO finish task logic
     })
 
-
-
-    const owner = req.user._id
 }
 
-// const Task = require('../models/Task.model')
+/**
+ * Updates a Task (INCOMPLETE CHECK THIS)
+ */
+const updateTask = (req, res, next) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['title', 'description', 'groupName']
+    const isValidOperation = updates.every(update => allowedUpdates.includes(update))
 
-// router.get('/tasks', async (req, res) => {
-//     try {
-//         const tasks = await Task.find({})
-//         res.send(tasks)
-//     } catch (e) {
-//         res.status(500).send()
-//     }
-// })
+    if (!isValidOperation) {
+        return res
+            .status(400)
+            .send({ error: 'Invalid Updates!' })
+    }
 
-// router.post('/tasks', async (req, res) => {
-//     const { 
-//         title,
-//         description,
-//         groupName
-//     } = req.body
+    try {
+        const task = await Task
+            .findByIdAndUpdate(
+                req.params.id, 
+                req.body, 
+                { new: true, runValidators: true }
+            )
 
-//     const task = new Task({
-//         title,
-//         description,
-//         groupName 
-//     })
+        if (!task) {
+            return res
+                .status(404)
+                .send()
+        }
 
-//     try {
-//         await task.save()
-//         res.status(201).send(task)
-//     } catch (e) {
-//         res.status(400).send(e)
-//     }
-// })
+        res.send(task)
+    } catch (e) {
+        return res
+            .status(400)
+            .send(e)
+    }
+}
+
+/**
+ * Deletes a Task
+ */
+const deleteTask = (req, res, next) => {
+
+}
+
+module.exports = {
+    getTasks,
+    createTask,
+    updateTask,
+    deleteTask
+}
 
 // router.put('/tasks/:id', async (req, res) => {
 //     const updates = Object.keys(req.body)
