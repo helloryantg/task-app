@@ -7,6 +7,9 @@ const taskSchema = new Schema({
         type: String,
         max: 500
     },
+    groupId: {
+        type: String
+    },
     groupName: {
         type: String,
         required: true,

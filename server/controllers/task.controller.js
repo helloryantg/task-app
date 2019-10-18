@@ -32,10 +32,23 @@ const createTask = async (req, res, next) => {
         return res.status(422).send({ error: 'You must provide a groupName and a task title' })
     }
 
-    Group.findOne({ _id: groupId }, function (err, existingGroup) {
+    Group.findOne({ _id: groupId, groupName }, function (err, existingGroup) {
         if (err) return next(err)
 
-        // TODO finish task logic
+        if (existingGroup) {
+            const task = new Task({ 
+                description,
+                groupId,
+                groupName,
+                title
+            })
+
+            task.save(function (err) {
+                if (err) return next(err)
+
+                res.send(task._id)
+            })
+        }
     })
 
 }
