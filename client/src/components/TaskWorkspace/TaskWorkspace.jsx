@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import TaskColumn from '../TaskColumn/TaskColumn'
 import styled from 'styled-components'
+import { getUserGroups } from '../../services/group.service'
 
 const TaskWorkspaceWrapper = styled.div`
     display: flex;
@@ -8,25 +9,40 @@ const TaskWorkspaceWrapper = styled.div`
     align-items: flex-start;
 `
 
-function TaskWorkspace(props) {
+class TaskWorkspace extends Component {
     
-    const groups = props.groups
+    state = {
+        groups: []
+    }
+    
+    async componentDidMount() {
+        const groups = await getUserGroups(this.props.user)
 
-    return (
-        <TaskWorkspaceWrapper>
-            {groups.length && groups.map((group, idx) => {
-                const items = group.tasks
+        console.log(groups)
+    }
 
-                return (
-                    <TaskColumn 
-                        title={group.title}
-                        items={items}
-                        key={idx}
-                    />
-                )
-            })}
-        </TaskWorkspaceWrapper>
-    )
+    render () {
+        
+        const {
+            groups
+        } = this.state
+
+        return (
+            <TaskWorkspaceWrapper>
+                {groups.length && groups.map((group, idx) => {
+                    const items = group.tasks
+    
+                    return (
+                        <TaskColumn 
+                            title={group.title}
+                            items={items}
+                            key={idx}
+                        />
+                    )
+                })}
+            </TaskWorkspaceWrapper>
+        )
+    }
 }
 
 export default TaskWorkspace

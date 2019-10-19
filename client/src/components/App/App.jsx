@@ -90,7 +90,6 @@ class App extends Component {
 
     render() {
         const {
-            groups,
             user
         } = this.state
 
@@ -109,7 +108,9 @@ class App extends Component {
         } else {
             body = <AppWrapper>
                 <NavBar />
-                <TaskWorkspace groups={groups} />
+                <TaskWorkspace 
+                    user={user} 
+                />
             </AppWrapper>
         }
 

@@ -6,6 +6,10 @@ export const setToken = token => {
     }
 }
 
+export const getAuthToken = () => {
+    return localStorage.getItem('token') || null
+}
+
 const getToken = () => {
     const token = localStorage.getItem('token')
 
