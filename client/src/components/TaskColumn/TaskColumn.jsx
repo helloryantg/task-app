@@ -307,7 +307,7 @@ class TaskColumn extends Component {
                     </IconWrapper>
                 </div>
 
-                {/* <div className="items">
+                <div className="items">
                     {items.map((item, idx) => {
                         return (
                             <div
@@ -344,7 +344,7 @@ class TaskColumn extends Component {
                             </div>
                         )
                     })}
-                </div> */}
+                </div>
 
                 <div className="button">
                     {addButton ?
