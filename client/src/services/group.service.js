@@ -15,10 +15,12 @@ export const getGroups = (ids) => {
     return axios.post('/groups/getGroups', data)
 }
 
-export const getUserGroups = (user) => {
-    return axios.get(`/groups/all?owner=${user._id}`, {
+export const getUserGroups = async (user) => {
+    const response = await axios.get(`/groups/all?owner=${user._id}`, {
         headers: {
             Authorization: getAuthToken()
         }
     })
+
+    return response.data
 }

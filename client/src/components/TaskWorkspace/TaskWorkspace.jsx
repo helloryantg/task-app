@@ -18,7 +18,9 @@ class TaskWorkspace extends Component {
     async componentDidMount() {
         const groups = await getUserGroups(this.props.user)
 
-        console.log(groups)
+        this.setState(() => ({
+            groups
+        }))
     }
 
     render () {
@@ -27,6 +29,8 @@ class TaskWorkspace extends Component {
             groups
         } = this.state
 
+        console.log('groups', groups)
+
         return (
             <TaskWorkspaceWrapper>
                 {groups.length && groups.map((group, idx) => {
@@ -34,8 +38,7 @@ class TaskWorkspace extends Component {
     
                     return (
                         <TaskColumn 
-                            title={group.title}
-                            items={items}
+                            title={group.label}
                             key={idx}
                         />
                     )
