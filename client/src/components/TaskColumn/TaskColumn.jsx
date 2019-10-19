@@ -15,7 +15,7 @@ import close from '../../icons/close.svg'
 import add from '../../icons/add.svg'
 import {
     addGroup,
-    addTask
+    // addTask
 } from '../../services/group.service'
 
 const TaskColumnWrapper = styled.div`
@@ -227,7 +227,7 @@ class TaskColumn extends Component {
             group: this.props.title,
             task: newItem
         }
-        addTask(data)
+        // addTask(data)
 
         this.setState((prevState) => ({
             items: [...prevState.items, newItem],

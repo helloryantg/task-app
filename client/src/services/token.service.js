@@ -9,16 +9,33 @@ export const setToken = token => {
 const getToken = () => {
     const token = localStorage.getItem('token')
 
-    if (token) {
-        const payload = JSON.parse(atob(token.split('.'[1])))
+    try {
+        // Get Token Header
+        const base64HeaderUrl = token.split('.')[0];
+        const base64Header = base64HeaderUrl.replace('-', '+').replace('_', '/');
+        const headerData = JSON.parse(window.atob(base64Header));
+    
+        // Get Token payload and date's
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        const dataJWT = JSON.parse(window.atob(base64));
+        dataJWT.header = headerData;
+    
+        return dataJWT;
+      } catch (err) {
+        return false;
+      }
 
-        if (payload.exp < Date.now() / 1000) {
-            localStorage.removeItem('token')
-            token = null
-        }
-    }
+    // if (token) {
+    //     const payload = JSON.parse(atob(token.split('.'[1])))
 
-    return token
+    //     if (payload.exp < Date.now() / 1000) {
+    //         localStorage.removeItem('token')
+    //         token = null
+    //     }
+    // }
+
+    // return token
 }
 
 export const removeToken = () => {
@@ -28,5 +45,5 @@ export const removeToken = () => {
 export const getUserFromToken = () => {
     const token = getToken()
 
-    return token ? JSON.parse(atob(token.split('.'[1]))).user : null
+    return token ? token.user : null
 }

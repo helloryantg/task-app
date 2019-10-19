@@ -17,6 +17,7 @@ import {
 } from 'react-router-dom'
 import LoginPage from '../../components/LoginPage/LoginPage'
 import SignupPage from '../../components/SignupPage/SignupPage'
+import { getUser } from '../../services/user.service'
 
 const AppWrapper = styled.div`
     height: 120vh;
@@ -80,12 +81,10 @@ class App extends Component {
     }
 
     async componentDidMount() {
-
-        const response = await getAllGroups()
-        const groups = response.data.groups.map(group => new GroupTask().resolve(group))
-
+        const user = await getUser()
+    
         this.setState(() => ({
-            groups
+            user
         }))
     }
 

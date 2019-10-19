@@ -27,10 +27,12 @@ const login = (req, res, next) => {
                 if (err) return next(err)
 
                 if (isMatch) {
-                    res.json({
-                        token: createJWT(user),
-                        user
-                    })
+                    res
+                        .status(200)
+                        .json({
+                            token: createJWT(user),
+                            user
+                        })
                 } else {
                     return res
                         .status(401)
@@ -59,7 +61,7 @@ const signup = (req, res, next) => {
     }
 
     User.findOne({ email }, function (err, existingUser) {
-        if (err) return next(err) 
+        if (err) return next(err)
 
         if (existingUser) {
             return res
@@ -67,9 +69,9 @@ const signup = (req, res, next) => {
                 .send({ error: 'Email is already in use' })
         }
 
-        const user = new User({ 
-            email, 
-            name, 
+        const user = new User({
+            email,
+            name,
             password
         })
 
