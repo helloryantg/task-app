@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // Routes
 app.use(require('./routes/group.route'))
-// app.use(require('./routes/task.route'))
+app.use(require('./routes/task.route'))
 app.use(require('./routes/api/user.route'))
 
 // Catch all route

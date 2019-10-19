@@ -32,7 +32,7 @@ const createTask = async (req, res, next) => {
         return res.status(422).send({ error: 'You must provide a groupName and a task title' })
     }
 
-    Group.findOne({ _id: groupId, groupName }, function (err, existingGroup) {
+    Group.findOne({ _id: groupId }, function (err, existingGroup) {
         if (err) return next(err)
 
         if (existingGroup) {
@@ -40,7 +40,8 @@ const createTask = async (req, res, next) => {
                 description,
                 groupId,
                 groupName,
-                title
+                title,
+                owner: user._id
             })
 
             task.save(function (err) {
