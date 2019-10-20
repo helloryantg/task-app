@@ -1,7 +1,24 @@
-POST http://localhost:5000/login HTTP/1.1
-content-type: application/json
+@base = http://localhost:5000
+@content-type = application/json
+
+
+POST {{base}}/login
+Content-Type: {{content-type}}
 
 {
     "email": "third@gmail.com",
     "password": "third"
 }
+
+###
+POST {{base}}/tasks/create
+Content-Type: {{content-type}}
+Authorization: {{token}}
+
+{
+    "description": "Third task",
+    "groupName": "First Column",
+    "groupId": "5da2a2b23401155e4493aa14",
+    "title": "Task Three"
+}
+

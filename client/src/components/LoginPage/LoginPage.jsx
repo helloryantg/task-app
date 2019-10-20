@@ -109,6 +109,7 @@ class LoginPage extends Component {
                             name="email" 
                             type="text" 
                             onChange={this.handleChange} 
+                            value={this.state.email}
                         />
                     </div>
                     <div className="password">
@@ -118,6 +119,7 @@ class LoginPage extends Component {
                             type="password"
                             autoComplete="new-password"
                             onChange={this.handleChange}
+                            value={this.state.password}
                         />
                     </div>
                     <Link 

@@ -193,6 +193,7 @@ class TaskColumn extends Component {
         editTextValue: ''
     }
 
+    // Lifecycle methods
     componentDidMount() {
         this.setState(() => ({
             items: this.props.items
@@ -209,6 +210,7 @@ class TaskColumn extends Component {
         }
     }
 
+    // Other methods
     handleClickAdd = () => {
         this.setState(prevState => ({
             addButton: !prevState.addButton,

@@ -6,7 +6,7 @@ const logger = require('morgan')
 const app = express()
 
 // Database config files
-require('dotenv').config();
+require('dotenv').config()
 require('./config/database')
 
 // Middleware

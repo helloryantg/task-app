@@ -26,7 +26,7 @@ class TaskWorkspace extends Component {
 
     async handleGetTasks() {
         const tasks = await getAllTasks(this.props.user)
-
+        
         console.log(tasks)
 
         return tasks

@@ -32,6 +32,7 @@ const createTask = async (req, res, next) => {
         return res.status(422).send({ error: 'You must provide a groupName and a task title' })
     }
 
+    // Add a check for same name
     Group.findOne({ _id: groupId }, function (err, existingGroup) {
         if (err) return next(err)
 
